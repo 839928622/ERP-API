@@ -26,6 +26,14 @@ namespace ERP_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAuthentication("Bearer")
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "http://localhost:6556"; //授权服务器端点
+                        options.RequireHttpsMetadata = false;//不需要https，生产环境根据需要适配
+                        options.Audience = "ERP-API";//需要在授权服务器登记该信息，位于ApiScopes表
+
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
