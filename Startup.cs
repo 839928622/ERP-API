@@ -35,6 +35,7 @@ namespace ERP_API
                         options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(60);//每隔60分钟本API项目验证一次token
                         options.TokenValidationParameters.RequireExpirationTime = true;//要求token必须设置过期时间
                     });
+            services.AddMemoryCache();//使用缓存 测试环境，暂时不用数据库
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
