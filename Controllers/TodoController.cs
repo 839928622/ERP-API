@@ -14,6 +14,7 @@ namespace ERP_API.Controllers
 {
     [ApiController]
     [Authorize]
+    [Route("[controller]/[action]")]
     public class TodoController :ControllerBase
     {
         private readonly IMemoryCache _memoryCache;
@@ -51,8 +52,9 @@ namespace ERP_API.Controllers
                 _memoryCache.Set("toDoList", toDoList,options);//如果缓存里没有的话，就将数据放入缓存
             }
         }
-
         [HttpGet]
+        [AllowAnonymous]
+        
         public IActionResult GetToDoList()
         {
            var toDoList = _memoryCache.Get<List<ToDo>>("ToDoList");
