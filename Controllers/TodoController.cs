@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using ERP_API.Models.ToDo;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
 namespace ERP_API.Controllers
@@ -45,20 +47,29 @@ namespace ERP_API.Controllers
                 },
             };
 
-            if (!_memoryCache.TryGetValue("toDoList",out List<ToDo> toDoList))
+            if (!_memoryCache.TryGetValue("toDoList", out List<ToDo> toDoList))
             {
                 var options = new MemoryCacheEntryOptions();
                 options.SetAbsoluteExpiration(TimeSpan.FromDays(1));//设置过期时间 1天
-                _memoryCache.Set("toDoList", toDoList,options);//如果缓存里没有的话，就将数据放入缓存
+                _memoryCache.Set("toDoList", _toDo,options);//如果缓存里没有的话，就将数据放入缓存
             }
         }
         [HttpGet]
-        [AllowAnonymous]
+       
         
-        public IActionResult GetToDoList()
+        public async Task<IActionResult> GetToDoList()
         {
-           var toDoList = _memoryCache.Get<List<ToDo>>("ToDoList");
+            var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+            var toDoList = _memoryCache.Get<List<ToDo>>("toDoList");
+           var branchId=  User.FindFirst("branchId").Value;//这个就是用户的branchId
            return Ok(toDoList);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult TestToDo()
+        {
+            return Ok("您成功访问了测试页面");
         }
     }
 }
