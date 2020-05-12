@@ -17,7 +17,7 @@ namespace ERP_API.Controllers
     [ApiController]
     [Authorize]
     [Route("[controller]/[action]")]
-    public class TodoController :ControllerBase
+    public class TodoController : BaseController
     {
         private readonly IMemoryCache _memoryCache;
         private readonly List<ToDo> _toDo;
@@ -62,6 +62,7 @@ namespace ERP_API.Controllers
             var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
             var toDoList = _memoryCache.Get<List<ToDo>>("toDoList");
            var branchId=  User.FindFirst("branchId").Value;//这个就是用户的branchId
+           var xx = UserBranchId;
            return Ok(toDoList);
         }
 
