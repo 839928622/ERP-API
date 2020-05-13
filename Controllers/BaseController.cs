@@ -10,11 +10,13 @@ namespace ERP_API.Controllers
         public BaseController()
         {
             this.UserBranchId = Convert.ToInt32(User.FindFirst("branchId").Value);
+            this.UserBranchIdString = User.FindFirst("branchId").Value;
             this.UserId = User.FindFirst(JwtClaimTypes.Id).Value;
 
         }
 
         protected int UserBranchId { get; }
+        protected string UserBranchIdString { get; }
         protected string UserId { get; }
     }
 }
