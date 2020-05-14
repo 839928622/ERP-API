@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using ERP_API.EntityConfigurations;
+using ERP_API.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -7,16 +12,18 @@ namespace ERP_API.Models
 {
     public partial class ApplicationDbContext : DbContext
     {
-        private readonly string _branchId;
-
+        private readonly string _branchIdString;
+        private readonly int _branchId;
+        public bool CheckAccrossBranchIdOprations { get; set; } = true;
         public ApplicationDbContext()
         {
         }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,string branchId)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
-            _branchId = branchId;
+            _branchIdString =  httpContextAccessor.HttpContext.User.FindFirst(CustomizedClaims.BranchId).Value;
+            _branchId =  Convert.ToInt32(_branchIdString);
         }
 
         public virtual DbSet<AttachedFil> AttachedFil { get; set; }
@@ -453,21 +460,81 @@ namespace ERP_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                if (string.IsNullOrEmpty(_branchId))
+                if (string.IsNullOrEmpty(_branchIdString))
                 {
                     optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable("ERPDB") ?? throw new InvalidOperationException("Can not read ConnecttingString from EnvironmentVariable"));
 
                 }
                 else
                 {
-                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable($"{_branchId}") ??
+                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable($"{_branchIdString}") ??
                                                 throw new InvalidOperationException(
                                                     "Can not read ConnecttingString from EnvironmentVariable"));
                 }
             }
         }
+        public void SetGlobalQuery<T>(ModelBuilder builder) where T: BaseEntity
+        {
+            builder.Entity<T>().HasKey(e => e.Id);
+            builder.Entity<T>().HasQueryFilter(e => e.BranchId == _branchId);//全表过滤
+        }
+        public override int SaveChanges()
+        {
+            if (CheckAccrossBranchIdOprations)
+            {
+                CheckAccrossBranchOpration();
+            }
+            return base.SaveChanges();
+        }
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            if (CheckAccrossBranchIdOprations)
+            {
+                CheckAccrossBranchOpration();
+            }
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            if (CheckAccrossBranchIdOprations)
+            {
+                CheckAccrossBranchOpration();
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken())
+        {
+            if (CheckAccrossBranchIdOprations)
+            {
+                CheckAccrossBranchOpration();
+            }
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+      
+
+        private void CheckAccrossBranchOpration()
+        {
+            var ids = (from e in ChangeTracker.Entries()
+                    where e.Entity is BaseEntity
+                    select ((BaseEntity) e.Entity).BranchId)
+                .Distinct().ToList();
+            if (ids.Count == 0)
+            {
+                return;
+            }
+
+            if (ids.Count > 1)
+            {
+                throw new CrossBranchOperationException($"EF检测到跨Branch操作，具体Branch为：[{string.Join(',',ids)}]");
+            }
+
+            if (ids.First() != _branchId)
+            {
+                throw new CrossBranchOperationException($"EF检测到跨Branch操作，具体Branch为：[{string.Join(',', ids)}]");
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AttachedFilConfiguration());
@@ -17486,5 +17553,7 @@ namespace ERP_API.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+      
     }
 }

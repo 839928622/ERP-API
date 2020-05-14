@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using ERP_API.Models;
 using ERP_API.Models.ToDo;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -14,16 +15,20 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace ERP_API.Controllers
 {
-    [ApiController]
-    [Authorize]
+   
     [Route("[controller]/[action]")]
+  
     public class TodoController : BaseController
     {
         private readonly IMemoryCache _memoryCache;
         private readonly List<ToDo> _toDo;
-
+        private readonly ApplicationDbContext _dBContext;
+       
         public TodoController(IMemoryCache memoryCache)
         {
+            
+
+
             _memoryCache = memoryCache;
             _toDo = new List<ToDo>()
             {
@@ -46,6 +51,9 @@ namespace ERP_API.Controllers
                     Completed = false
                 },
             };
+           
+
+
 
             if (!_memoryCache.TryGetValue("toDoList", out List<ToDo> toDoList))
             {
@@ -63,6 +71,7 @@ namespace ERP_API.Controllers
             var toDoList = _memoryCache.Get<List<ToDo>>("toDoList");
            var branchId=  User.FindFirst("branchId").Value;//这个就是用户的branchId
            var xx = UserBranchId;
+           
            return Ok(toDoList);
         }
 

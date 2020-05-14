@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using ERP_API.Models;
+using ERP_API.Service.PrincipalAccessor;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,8 @@ namespace ERP_API
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options => { });//不在这里进行配置
             services.AddMemoryCache();//使用缓存 测试环境，暂时不用数据库
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IPrincipalAccessor, PrincipalAccessor>();
             services.AddDistributedMemoryCache();
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //我们关闭了jwt claims的类型映射，以便允许well-known claims的接入
             //services.AddAuthentication("Bearer")

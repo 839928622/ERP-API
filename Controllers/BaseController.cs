@@ -1,22 +1,20 @@
 ﻿using System;
+using ERP_API.Infrastructure;
 using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace ERP_API.Controllers
 {
-    
+   
+    [Authorize]
+    [ApiController]
     public class BaseController : ControllerBase
     {
-        public BaseController()
-        {
-            this.UserBranchId = Convert.ToInt32(User.FindFirst("branchId").Value);
-            this.UserBranchIdString = User.FindFirst("branchId").Value;
-            this.UserId = User.FindFirst(JwtClaimTypes.Id).Value;
 
-        }
-
-        protected int UserBranchId { get; }
-        protected string UserBranchIdString { get; }
-        protected string UserId { get; }
+        protected string UserId => User.FindFirst(JwtClaimTypes.Subject).Value;
+        protected int UserBranchId => Convert.ToInt32(User.FindFirst(CustomizedClaims.BranchId).Value);
+        protected string UserBranchIdString => User.FindFirst(CustomizedClaims.BranchId).Value;
     }
 }
