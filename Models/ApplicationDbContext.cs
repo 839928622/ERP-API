@@ -544,81 +544,16 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new CrawlerRequestConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerBalanceLogConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new CustomerInvoiceInfoConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerLogConfiguration());
 
-            
 
-            
 
-            modelBuilder.Entity<CustomerInvoiceInfo>(entity =>
-            {
-                entity.Property(e => e.InvoiceAccount)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("开户行账号");
 
-                entity.Property(e => e.InvoiceAddress)
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasComment("地址");
 
-                entity.Property(e => e.InvoiceBank)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("开户行");
 
-                entity.Property(e => e.InvoiceMemo)
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasComment("发票备注");
 
-                entity.Property(e => e.InvoicePhone)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
-                entity.Property(e => e.InvoiceTaxNo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("税号");
-
-                entity.Property(e => e.MemberName)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('0')");
-            });
-
-            modelBuilder.Entity<CustomerLog>(entity =>
-            {
-                entity.Property(e => e.AddTime)
-                    .HasColumnType("datetime")
-                    .HasComment("添加时间");
-
-                entity.Property(e => e.Category)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasComment("操作类别");
-
-                entity.Property(e => e.Customer)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Operate)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasComment("操作");
-
-                entity.Property(e => e.Tracking).HasComment("修改详细信息，扩展字段");
-
-                entity.Property(e => e.UserId).HasComment("操作人Id(Sys_Users)");
-
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("操作人名称");
-            });
 
             modelBuilder.Entity<CustomerPreReceiveMoney>(entity =>
             {
