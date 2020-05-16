@@ -527,12 +527,12 @@ namespace ERP_API.Models
 
             if (ids.Count > 1)
             {
-                throw new CrossBranchOperationException($"EF检测到跨Branch操作，具体Branch为：[{string.Join(',',ids)}]");
+                throw new CrossBranchOperationException($"EF检测到跨Branch操作，当前Branch:{_branchId},跨越Branch为：[{string.Join(',',ids)}]");
             }
 
             if (ids.First() != _branchId)
             {
-                throw new CrossBranchOperationException($"EF检测到跨Branch操作，具体Branch为：[{string.Join(',', ids)}]");
+                throw new CrossBranchOperationException($"EF检测到跨Branch操作，当前Branch:{_branchId},跨越Branch为：[{string.Join(',', ids)}]");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
