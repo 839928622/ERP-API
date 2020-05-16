@@ -548,7 +548,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new CustomerLogConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerPreReceiveMoneyConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerSettingConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DefaultStoreConfiguration());
 
 
 
@@ -559,27 +559,7 @@ namespace ERP_API.Models
 
             
 
-            modelBuilder.Entity<DefaultStore>(entity =>
-            {
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.OrderType)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Place)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StoreId).HasDefaultValueSql("('0')");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
+           
 
             modelBuilder.Entity<DeliveryLine>(entity =>
             {
