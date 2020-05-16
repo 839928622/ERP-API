@@ -550,7 +550,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new CustomerSettingConfiguration());
             modelBuilder.ApplyConfiguration(new DefaultStoreConfiguration());
             modelBuilder.ApplyConfiguration(new DeliveryLineConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DeliveryLineCustomerConfiguration());
 
 
 
@@ -563,14 +563,6 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<DeliveryLineCustomer>(entity =>
-            {
-                entity.Property(e => e.Distance).HasComment("配送距离（公里）");
-
-                entity.Property(e => e.Remark).HasMaxLength(100);
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
 
             modelBuilder.Entity<DeliveryLineMember>(entity =>
             {
