@@ -547,7 +547,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new CustomerInvoiceInfoConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerLogConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerPreReceiveMoneyConfiguration());
-
+            modelBuilder.ApplyConfiguration(new CustomerSettingConfiguration());
 
 
 
@@ -557,36 +557,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<CustomerSetting>(entity =>
-            {
-                entity.HasComment("重要客户自定义设置");
-
-                entity.Property(e => e.Id).HasComment("PK");
-
-                entity.Property(e => e.Alias)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasComment("别名");
-
-                entity.Property(e => e.CustomerId).HasComment("客户编号");
-
-                entity.Property(e => e.Image)
-                    .IsRequired()
-                    .HasMaxLength(2000)
-                    .HasComment("图片");
-
-                entity.Property(e => e.Logo)
-                    .IsRequired()
-                    .HasMaxLength(2000)
-                    .HasComment("Logo");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasComment("名称");
-
-                entity.Property(e => e.Tenant).HasComment("租户");
-            });
+            
 
             modelBuilder.Entity<DefaultStore>(entity =>
             {
