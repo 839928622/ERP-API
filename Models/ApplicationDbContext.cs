@@ -549,7 +549,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new CustomerPreReceiveMoneyConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerSettingConfiguration());
             modelBuilder.ApplyConfiguration(new DefaultStoreConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DeliveryLineConfiguration());
 
 
 
@@ -561,24 +561,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<DeliveryLine>(entity =>
-            {
-                entity.HasIndex(e => new { e.BranchId, e.LineName })
-                    .HasName("IX_DeliveryLine")
-                    .IsUnique();
-
-                entity.Property(e => e.BranchId).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.LineName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.LineRange).HasMaxLength(200);
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
+           
 
             modelBuilder.Entity<DeliveryLineCustomer>(entity =>
             {
