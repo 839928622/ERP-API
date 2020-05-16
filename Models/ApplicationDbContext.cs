@@ -546,6 +546,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new CustomerBalanceLogConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerInvoiceInfoConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerLogConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerPreReceiveMoneyConfiguration());
 
 
 
@@ -554,72 +555,7 @@ namespace ERP_API.Models
 
 
 
-
-            modelBuilder.Entity<CustomerPreReceiveMoney>(entity =>
-            {
-                entity.Property(e => e.ActualPayTime).HasColumnType("datetime");
-
-                entity.Property(e => e.Balance)
-                    .HasColumnType("money")
-                    .HasComment("余额");
-
-                entity.Property(e => e.BranchId).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.CustomerId).HasComment("客户Id");
-
-                entity.Property(e => e.CustomerName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasComment("客户名称");
-
-                entity.Property(e => e.InitialBalance)
-                    .HasColumnType("money")
-                    .HasComment("期初金额");
-
-                entity.Property(e => e.Memo)
-                    .HasColumnType("text")
-                    .HasComment("备注");
-
-                entity.Property(e => e.Operate)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .HasComment("操作(预收、收款、撤销)");
-
-                entity.Property(e => e.OperatorId).HasComment("操作人Id");
-
-                entity.Property(e => e.OperatorName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("操作人名称");
-
-                entity.Property(e => e.OrderStatementId).HasComment("对账单Id");
-
-                entity.Property(e => e.PayType)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.PreReceiveMoney)
-                    .HasColumnType("money")
-                    .HasComment("预收金额");
-
-                entity.Property(e => e.ReceiveAccount)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.ReceiveMoney)
-                    .HasColumnType("money")
-                    .HasComment("收款金额");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasComment("更新时间");
-            });
+           
 
             modelBuilder.Entity<CustomerSetting>(entity =>
             {
