@@ -567,28 +567,13 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyDetailConfiguration());
 
           
 
           
 
-            modelBuilder.Entity<DistributionReceiveMoneyDetail>(entity =>
-            {
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasComment("明细实收金额");
-
-                entity.Property(e => e.ChargeOffAmount)
-                    .HasColumnType("money")
-                    .HasComment("明细销账金额");
-
-                entity.Property(e => e.Price).HasColumnType("money");
-
-                entity.Property(e => e.ReceiveMoneyId).HasComment("分销订单收款记录表Id");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<Dostatement>(entity =>
             {
