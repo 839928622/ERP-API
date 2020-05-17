@@ -560,7 +560,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionInvoiceConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DistributionInvoiceDetailConfiguration());
 
 
 
@@ -584,37 +584,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<DistributionInvoiceDetail>(entity =>
-            {
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasComment("金额");
-
-                entity.Property(e => e.ChargeOffAmount).HasColumnType("money");
-
-                entity.Property(e => e.GoodsId).HasComment("商品编号");
-
-                entity.Property(e => e.InvoiceId).HasComment("DistributionInvoice表Id");
-
-                entity.Property(e => e.Num).HasComment("数量");
-
-                entity.Property(e => e.OrderId).HasComment("订单编号");
-
-                entity.Property(e => e.Price)
-                    .HasColumnType("money")
-                    .HasComment("单价");
-
-                entity.Property(e => e.TaxCode)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("商品税收编码");
-
-                entity.Property(e => e.TaxRate)
-                    .HasColumnType("money")
-                    .HasComment("税率");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<DistributionOrderState>(entity =>
             {
