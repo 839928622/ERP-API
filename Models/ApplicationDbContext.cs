@@ -582,18 +582,13 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new GoodsCaptchaConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsCommentConfiguration());
-
+            modelBuilder.ApplyConfiguration(new GoodsDefaultInfoConfiguration());
            
 
            
 
 
-            modelBuilder.Entity<GoodsDefaultInfo>(entity =>
-            {
-                entity.Property(e => e.AddTime).HasColumnType("datetime");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<GoodsExtensions>(entity =>
             {
