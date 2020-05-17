@@ -565,54 +565,11 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionPayConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionPayDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
 
             
 
-            modelBuilder.Entity<DistributionReceiveInvoiceDetail>(entity =>
-            {
-                entity.HasComment("分销收票明细");
-
-                entity.HasIndex(e => e.GoodsId)
-                    .HasName("IX_GoodsId");
-
-                entity.HasIndex(e => e.OrderId)
-                    .HasName("IX_OrderId");
-
-                entity.HasIndex(e => e.ReceiveInvoiceId)
-                    .HasName("IX_ReceiveInvoiceId");
-
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasComment("开票金额");
-
-                entity.Property(e => e.ChargeOffAmount)
-                    .HasColumnType("money")
-                    .HasComment("销账金额");
-
-                entity.Property(e => e.GoodsId).HasComment("商品编号");
-
-                entity.Property(e => e.Num).HasComment("数量");
-
-                entity.Property(e => e.OrderId).HasComment("订单编号");
-
-                entity.Property(e => e.Price)
-                    .HasColumnType("money")
-                    .HasComment("单价");
-
-                entity.Property(e => e.ReceiveInvoiceId).HasComment("DistributionReceiveInvoice表Id");
-
-                entity.Property(e => e.TaxCode)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("商品税收编码");
-
-                entity.Property(e => e.TaxRate)
-                    .HasColumnType("money")
-                    .HasComment("税率");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+          
 
             modelBuilder.Entity<DistributionReceiveMoney>(entity =>
             {
