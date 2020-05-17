@@ -575,51 +575,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
             modelBuilder.ApplyConfiguration(new FinanceAuditConfiguration());
             modelBuilder.ApplyConfiguration(new FinanceRecordConfiguration());
-
-           
-
-           
-
-           
-
-           
-
-           
-
-           
-
-          
-
-           
-
-            modelBuilder.Entity<FinanceSubject>(entity =>
-            {
-                entity.Property(e => e.AddAt).HasColumnType("datetime");
-
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("科目编号");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .HasComment("科目名称");
-
-                entity.Property(e => e.Pcode)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("上级编号");
-
-                entity.Property(e => e.Type)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasComment("类型");
-
-                entity.Property(e => e.UpdatetAt).HasColumnType("datetime");
-            });
+            modelBuilder.ApplyConfiguration(new FinanceSubjectConfiguration());
 
             modelBuilder.Entity<Franchisee>(entity =>
             {
