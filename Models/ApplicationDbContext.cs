@@ -569,7 +569,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DostatementConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DostatementDetailConfiguration());
           
 
           
@@ -578,10 +578,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<DostatementDetail>(entity =>
-            {
-                entity.ToTable("DOStatementDetail");
-            });
+           
 
             modelBuilder.Entity<Dpstatement>(entity =>
             {
