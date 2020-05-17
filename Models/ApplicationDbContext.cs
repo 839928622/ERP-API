@@ -574,7 +574,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
             modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
             modelBuilder.ApplyConfiguration(new FinanceAuditConfiguration());
-            modelBuilder.ApplyConfigration(new FinanceRecordConfiguration());
+            modelBuilder.ApplyConfiguration(new FinanceRecordConfiguration());
 
            
 
