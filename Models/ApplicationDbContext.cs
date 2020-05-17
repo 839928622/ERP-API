@@ -566,7 +566,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionPayDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
-            modelBilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
+            modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
             
 
           
