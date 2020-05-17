@@ -563,49 +563,9 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionInvoiceDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionOrderStateConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionPayConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new DistributionPayDetailConfiguration());
 
-            modelBuilder.Entity<DistributionPayDetail>(entity =>
-            {
-                entity.HasComment("分销收款明细");
-
-                entity.HasIndex(e => e.GoodsId)
-                    .HasName("IX_GoodsId");
-
-                entity.HasIndex(e => e.OrderId)
-                    .HasName("IX_OrderId");
-
-                entity.HasIndex(e => e.PayId)
-                    .HasName("IX_PayId");
-
-                entity.Property(e => e.Id).HasComment("PK");
-
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasComment("明细实收金额");
-
-                entity.Property(e => e.ChargeOffAmount)
-                    .HasColumnType("money")
-                    .HasComment("销账金额");
-
-                entity.Property(e => e.GoodsId).HasComment("商品Id");
-
-                entity.Property(e => e.IsDelete).HasComment("是否删除");
-
-                entity.Property(e => e.Num).HasComment("数量");
-
-                entity.Property(e => e.OrderId).HasComment("订单Id");
-
-                entity.Property(e => e.PayId).HasComment("FK");
-
-                entity.Property(e => e.Price)
-                    .HasColumnType("money")
-                    .HasComment("单价");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasComment("操作时间");
-            });
+           
 
             modelBuilder.Entity<DistributionReceiveInvoice>(entity =>
             {
