@@ -574,7 +574,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
             modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
             modelBuilder.ApplyConfiguration(new FinanceAuditConfiguration());
-          
+            modelBuilder.ApplyConfigration(new FinanceRecordConfiguration());
 
            
 
@@ -590,75 +590,7 @@ namespace ERP_API.Models
 
           
 
-            modelBuilder.Entity<FinanceRecord>(entity =>
-            {
-                entity.Property(e => e.AddAt).HasColumnType("datetime");
-
-                entity.Property(e => e.Balance)
-                    .HasColumnType("money")
-                    .HasComment("余额");
-
-                entity.Property(e => e.BankId).HasComment("账户编号");
-
-                entity.Property(e => e.BankInfo)
-                    .HasMaxLength(1000)
-                    .HasComment("开户行+账号名称");
-
-                entity.Property(e => e.DebtorId).HasComment("借方");
-
-                entity.Property(e => e.DebtorName)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .HasComment("借方名称");
-
-                entity.Property(e => e.InitBalance)
-                    .HasColumnType("money")
-                    .HasComment("原金额");
-
-                entity.Property(e => e.LenderId).HasComment("贷方");
-
-                entity.Property(e => e.LenderName)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .HasComment("贷方名称");
-
-                entity.Property(e => e.Operate)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasComment("操作");
-
-                entity.Property(e => e.OperateAmount)
-                    .HasColumnType("money")
-                    .HasComment("操作金额");
-
-                entity.Property(e => e.OpreteDate)
-                    .HasColumnType("datetime")
-                    .HasComment("实际收/付款日期");
-
-                entity.Property(e => e.PayType)
-                    .HasMaxLength(200)
-                    .HasComment("支付方式");
-
-                entity.Property(e => e.Remark)
-                    .HasMaxLength(4000)
-                    .HasComment("备注");
-
-                entity.Property(e => e.SubjectCode)
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasComment("科目code");
-
-                entity.Property(e => e.SubjectName)
-                    .HasMaxLength(500)
-                    .HasComment("科目名称");
-
-                entity.Property(e => e.Tpn)
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasComment("第三方");
-
-                entity.Property(e => e.UpdateAt).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<FinanceSubject>(entity =>
             {
