@@ -561,59 +561,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionInvoiceDetailConfiguration());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-           
-
-           
-
-           
-
-            modelBuilder.Entity<DistributionOrderState>(entity =>
-            {
-                entity.Property(e => e.AllocationTime).HasColumnType("datetime");
-
-                entity.Property(e => e.ArriveTime).HasColumnType("datetime");
-
-                entity.Property(e => e.DeliveryTime).HasColumnType("datetime");
-
-                entity.Property(e => e.InvoiceChargeOff).HasColumnType("money");
-
-                entity.Property(e => e.InvoiceStatus).HasComment("收票状态：0:未收票；1：已收票；2：部分收票");
-
-                entity.Property(e => e.IsLocked)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.PickTime).HasColumnType("datetime");
-
-                entity.Property(e => e.PrintTime).HasColumnType("datetime");
-
-                entity.Property(e => e.ReceiveChargeOff).HasColumnType("money");
-
-                entity.Property(e => e.ReceiveMoneyStatus).HasComment("收款状态：0:未收款；1：已收款；2：部分收款");
-
-                entity.Property(e => e.ServiceResponseTime).HasColumnType("datetime");
-
-                entity.Property(e => e.SumMoney).HasColumnType("money");
-            });
+            modelBuilder.ApplyConfiguration(new DistributionOrderStateConfiguration());
 
             modelBuilder.Entity<DistributionPay>(entity =>
             {
