@@ -573,6 +573,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DpstatementConfiguration());
             modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
             modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
+            modelBuilder.ApplyConfiguration(new FinanceAuditConfiguration());
           
 
            
@@ -587,18 +588,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<FinanceAudit>(entity =>
-            {
-                entity.Property(e => e.FinanceData).HasColumnType("text");
-
-                entity.Property(e => e.Remark).HasMaxLength(1000);
-
-                entity.Property(e => e.Status).HasMaxLength(50);
-
-                entity.Property(e => e.Type).HasMaxLength(50);
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+          
 
             modelBuilder.Entity<FinanceRecord>(entity =>
             {
