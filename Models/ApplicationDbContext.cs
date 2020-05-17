@@ -583,30 +583,15 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new GoodsCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsCommentConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsDefaultInfoConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new GoodsGroupDetailConfiguration());
 
            
 
 
            
 
-            modelBuilder.Entity<GoodsExtensions>(entity =>
-            {
-                entity.Property(e => e.Id).HasComment("PK");
 
-                entity.Property(e => e.GoodsId).HasComment("商品编号");
-
-                entity.Property(e => e.Remark)
-                    .HasColumnType("text")
-                    .HasComment("规格内容");
-
-                entity.Property(e => e.VirtualSales).HasComment("商品虚拟销量，用于应对投标");
-            });
-
-            modelBuilder.Entity<GoodsGroupDetail>(entity =>
-            {
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<GoodsLog>(entity =>
             {
