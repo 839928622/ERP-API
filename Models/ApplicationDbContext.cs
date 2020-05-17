@@ -552,7 +552,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DeliveryLineConfiguration());
             modelBuilder.ApplyConfiguration(new DeliveryLineCustomerConfiguration());
             modelBuilder.ApplyConfiguration(new DeliveryLineMemberConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DellOrderGoodsPoConfiguration());
 
 
            
@@ -566,24 +566,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<DellOrderGoodsPo>(entity =>
-            {
-                entity.Property(e => e.GoodsName).HasMaxLength(500);
-
-                entity.Property(e => e.GoodsPrice).HasColumnType("money");
-
-                entity.Property(e => e.Po)
-                    .HasColumnName("PO")
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("生成的传给戴尔的订单号");
-
-                entity.Property(e => e.Status)
-                    .HasMaxLength(50)
-                    .HasComment("状态");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+         
 
             modelBuilder.Entity<Dept>(entity =>
             {
