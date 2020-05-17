@@ -577,19 +577,9 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new FinanceRecordConfiguration());
             modelBuilder.ApplyConfiguration(new FinanceSubjectConfiguration());
             modelBuilder.ApplyConfiguration(new FranchiseeConfiguration());
+            modelBuilder.ApplyConfiguration(new GiftConfiguration());
+
            
-
-            modelBuilder.Entity<Gift>(entity =>
-            {
-                entity.Property(e => e.GiftName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("礼品显示出来的名称，例如：反光书包");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
 
             modelBuilder.Entity<Goods>(entity =>
             {
