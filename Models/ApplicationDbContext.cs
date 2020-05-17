@@ -562,54 +562,8 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionInvoiceDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionOrderStateConfiguration());
-
-            modelBuilder.Entity<DistributionPay>(entity =>
-            {
-                entity.HasIndex(e => e.BranchId)
-                    .HasName("IX_BranchId");
-
-                entity.HasIndex(e => e.ChildBranchId)
-                    .HasName("IX_ChildBranchId");
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_UserId");
-
-                entity.Property(e => e.BranchId).HasComment("付款方");
-
-                entity.Property(e => e.ChargeOff)
-                    .HasColumnType("money")
-                    .HasComment("销账金额，与订单的销账金额相等");
-
-                entity.Property(e => e.ChildBranchId).HasComment("收款方");
-
-                entity.Property(e => e.Memo)
-                    .HasMaxLength(500)
-                    .HasComment("付款备注");
-
-                entity.Property(e => e.PayAccount).HasComment("付款账号");
-
-                entity.Property(e => e.PayDate)
-                    .HasColumnType("datetime")
-                    .HasComment("付款日期");
-
-                entity.Property(e => e.PayMoney)
-                    .HasColumnType("money")
-                    .HasComment("实际收款金额");
-
-                entity.Property(e => e.PayType)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("支付方式");
-
-                entity.Property(e => e.StatementId).HasComment("对账单号");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasComment("操作时间");
-
-                entity.Property(e => e.UserId).HasComment("操作人");
-            });
+            modelBuilder.ApplyConfiguration(new DistributionPayConfiguration());
+            
 
             modelBuilder.Entity<DistributionPayDetail>(entity =>
             {
