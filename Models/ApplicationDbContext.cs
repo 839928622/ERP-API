@@ -581,30 +581,12 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new GoodsConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsCaptchaConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsCategoryConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new GoodsCommentConfiguration());
 
            
 
            
 
-            modelBuilder.Entity<GoodsComment>(entity =>
-            {
-                entity.Property(e => e.Content)
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Label)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Level).HasDefaultValueSql("((3))");
-
-                entity.Property(e => e.OrderTime).HasColumnType("datetime");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
 
             modelBuilder.Entity<GoodsDefaultInfo>(entity =>
             {
