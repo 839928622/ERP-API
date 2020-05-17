@@ -566,47 +566,12 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionPayDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
-
+            modelBilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
             
 
           
 
-            modelBuilder.Entity<DistributionReceiveMoney>(entity =>
-            {
-                entity.Property(e => e.BranchId).HasComment("收款方");
-
-                entity.Property(e => e.ChargeOff)
-                    .HasColumnType("money")
-                    .HasComment("销账金额，与订单的销账金额相等");
-
-                entity.Property(e => e.Memo)
-                    .HasMaxLength(500)
-                    .HasComment("收款备注");
-
-                entity.Property(e => e.PayType)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("支付方式");
-
-                entity.Property(e => e.PbranchId)
-                    .HasColumnName("PBranchId")
-                    .HasComment("付款方");
-
-                entity.Property(e => e.ReceiveAccount).HasComment("付款账户，Sys_BranchBankInfo的编号");
-
-                entity.Property(e => e.ReceiveDate)
-                    .HasColumnType("datetime")
-                    .HasComment("收款日期");
-
-                entity.Property(e => e.ReceiveMoney)
-                    .HasColumnType("money")
-                    .HasComment("实际收款金额");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-
-                entity.Property(e => e.UserId).HasComment("收款操作人");
-            });
+          
 
             modelBuilder.Entity<DistributionReceiveMoneyDetail>(entity =>
             {
