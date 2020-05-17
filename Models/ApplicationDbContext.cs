@@ -572,7 +572,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DostatementDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DpstatementConfiguration());
             modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
-
+            modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
           
 
            
@@ -585,77 +585,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<EmailInvoiceSetting>(entity =>
-            {
-                entity.Property(e => e.AddTime)
-                    .HasColumnType("datetime")
-                    .HasComment("添加时间");
-
-                entity.Property(e => e.AppKey)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.AppSecret)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.IsEnable).HasComment("是否开启");
-
-                entity.Property(e => e.PlatApi)
-                    .IsRequired()
-                    .HasColumnName("PlatAPI")
-                    .IsUnicode(false)
-                    .HasComment("平台电子发票API");
-
-                entity.Property(e => e.PlatIdentity)
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasComment("平台身份认证编号");
-
-                entity.Property(e => e.SaleAddress)
-                    .IsRequired()
-                    .HasMaxLength(80)
-                    .IsUnicode(false)
-                    .HasComment("销售方地址");
-
-                entity.Property(e => e.SaleBank)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasComment("销售方开户行");
-
-                entity.Property(e => e.SaleBankAccount)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("销售方开户行账号");
-
-                entity.Property(e => e.SaleName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasComment("销售方名称");
-
-                entity.Property(e => e.SalePhone)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasComment("销售方电话");
-
-                entity.Property(e => e.SaleTaxNum)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasComment("销售方税号");
-
-                entity.Property(e => e.Token)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasComment("更新时间");
-            });
+           
 
             modelBuilder.Entity<FinanceAudit>(entity =>
             {
