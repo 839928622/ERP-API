@@ -568,6 +568,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new DostatementConfiguration());
 
           
 
@@ -575,49 +576,7 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<Dostatement>(entity =>
-            {
-                entity.ToTable("DOStatement");
-
-                entity.Property(e => e.ApplyInvoiceMoney).HasColumnType("money");
-
-                entity.Property(e => e.ApplyReceiveMoney).HasColumnType("money");
-
-                entity.Property(e => e.ChargeOff).HasColumnType("money");
-
-                entity.Property(e => e.EndDate).HasColumnType("datetime");
-
-                entity.Property(e => e.InvoiceChargeOff).HasColumnType("money");
-
-                entity.Property(e => e.InvoiceMoney).HasColumnType("money");
-
-                entity.Property(e => e.InvoiceStatus)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.InvoiceType)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Memo)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PaidMoney).HasColumnType("money");
-
-                entity.Property(e => e.PayStatus)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StartDate).HasColumnType("datetime");
-
-                entity.Property(e => e.SumGoodsAmount).HasColumnType("money");
-
-                entity.Property(e => e.SumMoney).HasColumnType("money");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<DostatementDetail>(entity =>
             {
