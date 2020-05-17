@@ -558,7 +558,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyDetailConfiguration());
 
 
 
@@ -580,32 +580,7 @@ namespace ERP_API.Models
 
             
 
-            modelBuilder.Entity<DistributionCustomerReceiveMoneyDetail>(entity =>
-            {
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasComment("明细实收金额");
-
-                entity.Property(e => e.ChargeOffAmount)
-                    .HasColumnType("money")
-                    .HasComment("明细销账金额");
-
-                entity.Property(e => e.GoodsName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Price).HasColumnType("money");
-
-                entity.Property(e => e.ReceiveMoneyId).HasComment("分销订单收款记录表Id");
-
-                entity.Property(e => e.Unit)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+           
 
             modelBuilder.Entity<DistributionInvoice>(entity =>
             {
