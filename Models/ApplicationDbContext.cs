@@ -537,58 +537,58 @@ namespace ERP_API.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AttachedFilConfiguration());
-            modelBuilder.ApplyConfiguration(new BrandConfiguration());
-            modelBuilder.ApplyConfiguration(new CanvassAgreementConfiguration());
-            modelBuilder.ApplyConfiguration(new CategoryParamsConfiguration());
-            modelBuilder.ApplyConfiguration(new CrawlerRequestConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerBalanceLogConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerInvoiceInfoConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerLogConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerPreReceiveMoneyConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerSettingConfiguration());
-            modelBuilder.ApplyConfiguration(new DefaultStoreConfiguration());
-            modelBuilder.ApplyConfiguration(new DeliveryLineConfiguration());
-            modelBuilder.ApplyConfiguration(new DeliveryLineCustomerConfiguration());
-            modelBuilder.ApplyConfiguration(new DeliveryLineMemberConfiguration());
-            modelBuilder.ApplyConfiguration(new DellOrderGoodsPoConfiguration());
-            modelBuilder.ApplyConfiguration(new DeptConfiguration());
-            modelBuilder.ApplyConfiguration(new DeptTempConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionInvoiceConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionInvoiceDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionOrderStateConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionPayConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionPayDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
-            modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DostatementConfiguration());
-            modelBuilder.ApplyConfiguration(new DostatementDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new DpstatementConfiguration());
-            modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
-            modelBuilder.ApplyConfiguration(new FinanceAuditConfiguration());
-            modelBuilder.ApplyConfiguration(new FinanceRecordConfiguration());
-            modelBuilder.ApplyConfiguration(new FinanceSubjectConfiguration());
-            modelBuilder.ApplyConfiguration(new FranchiseeConfiguration());
-            modelBuilder.ApplyConfiguration(new GiftConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsCaptchaConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsCategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsCommentConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsDefaultInfoConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsGroupDetailConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsLogConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsModelConfiguration());
-            modelBuilder.ApplyConfiguration(new GoodsModelValueConfiguration());
-
-           
+            //modelBuilder.ApplyConfiguration(new AttachedFilConfiguration());
+            //modelBuilder.ApplyConfiguration(new BrandConfiguration());
+            //modelBuilder.ApplyConfiguration(new CanvassAgreementConfiguration());
+            //modelBuilder.ApplyConfiguration(new CategoryParamsConfiguration());
+            //modelBuilder.ApplyConfiguration(new CrawlerRequestConfiguration());
+            //modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            //modelBuilder.ApplyConfiguration(new CustomerBalanceLogConfiguration());
+            //modelBuilder.ApplyConfiguration(new CustomerInvoiceInfoConfiguration());
+            //modelBuilder.ApplyConfiguration(new CustomerLogConfiguration());
+            //modelBuilder.ApplyConfiguration(new CustomerPreReceiveMoneyConfiguration());
+            //modelBuilder.ApplyConfiguration(new CustomerSettingConfiguration());
+            //modelBuilder.ApplyConfiguration(new DefaultStoreConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeliveryLineConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeliveryLineCustomerConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeliveryLineMemberConfiguration());
+            //modelBuilder.ApplyConfiguration(new DellOrderGoodsPoConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeptConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeptTempConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionInvoiceConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionInvoiceDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionOrderStateConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionPayConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionPayDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionReceiveInvoiceDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyConfiguration());
+            //modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DostatementConfiguration());
+            //modelBuilder.ApplyConfiguration(new DostatementDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new DpstatementConfiguration());
+            //modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmailInvoiceSettingConfiguration());
+            //modelBuilder.ApplyConfiguration(new FinanceAuditConfiguration());
+            //modelBuilder.ApplyConfiguration(new FinanceRecordConfiguration());
+            //modelBuilder.ApplyConfiguration(new FinanceSubjectConfiguration());
+            //modelBuilder.ApplyConfiguration(new FranchiseeConfiguration());
+            //modelBuilder.ApplyConfiguration(new GiftConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsCaptchaConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsCategoryConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsCommentConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsDefaultInfoConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsGroupDetailConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsLogConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsModelConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsModelValueConfiguration());
+            //modelBuilder.ApplyConfiguration(new GoodsPackageConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
 
            
@@ -599,241 +599,19 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<GoodsPackage>(entity =>
-            {
-                entity.HasIndex(e => new { e.GoodsId, e.Type })
-                    .HasName("IX_GoodsPackage")
-                    .IsUnique();
 
-                entity.Property(e => e.BarCode)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('‘’')");
+           
 
-                entity.Property(e => e.DonvvSkuCode)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+           
 
-                entity.Property(e => e.DonvvSpuCode)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+           
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
-                entity.Property(e => e.Price).HasColumnType("money");
+            
 
-                entity.Property(e => e.PriceExtend).HasColumnType("decimal(10, 2)");
+          
 
-                entity.Property(e => e.Type)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("(N'小')")
-                    .HasComment("[小、中、大]");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<GoodsPackageLog>(entity =>
-            {
-                entity.Property(e => e.BarCode)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.OldBarCode)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.OldName)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.Type)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<GoodsParamValue>(entity =>
-            {
-                entity.HasIndex(e => e.GoodsId)
-                    .HasName("IX_GoodsParamValue");
-
-                entity.HasIndex(e => new { e.ParamId, e.Value })
-                    .HasName("IX_GoodsParamValue_1");
-
-                entity.Property(e => e.GroupName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Value)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<GoodsPhoto>(entity =>
-            {
-                entity.HasIndex(e => e.GoodsId)
-                    .HasName("goodsphotoindex");
-
-                entity.Property(e => e.Height).HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.Photo100Url)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.Photo250Url)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.PhotoUrl)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasComment("图片在文件服务器上的访问路径");
-
-                entity.Property(e => e.Sort).HasDefaultValueSql("((10))");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Width).HasDefaultValueSql("((0))");
-            });
-
-            modelBuilder.Entity<GoodsPriceLog>(entity =>
-            {
-                entity.Property(e => e.BranchId).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.Memo)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.NewPrice).HasColumnType("money");
-
-                entity.Property(e => e.OldPrice).HasColumnType("money");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<GoodsType>(entity =>
-            {
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DefaultSource)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DefaultUnit)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.IsLeaf)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))")
-                    .HasComment("是否是叶子分类（一般是3级），只允许在叶子分类下添加商品");
-
-                entity.Property(e => e.IsVisible)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Pcode)
-                    .IsRequired()
-                    .HasColumnName("PCode")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PointRate)
-                    .HasDefaultValueSql("((100))")
-                    .HasComment("积分比率");
-
-                entity.Property(e => e.PriceArea)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')")
-                    .HasComment("价格区间展示");
-
-                entity.Property(e => e.Py)
-                    .HasColumnName("PY")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<GoodsTypeParam>(entity =>
-            {
-                entity.HasIndex(e => new { e.GroupId, e.Name })
-                    .HasName("IX_GoodsTypeParams")
-                    .IsUnique();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<GoodsTypeParamGroup>(entity =>
-            {
-                entity.HasIndex(e => new { e.TypeId, e.GroupName, e.BranchId })
-                    .HasName("IX_GoodsTypeParamGroup")
-                    .IsUnique();
-
-                entity.Property(e => e.GroupName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ParamSource)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.Sort).HasDefaultValueSql("((10))");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
+            
 
             modelBuilder.Entity<GoodsTypeParamOption>(entity =>
             {
