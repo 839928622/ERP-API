@@ -584,70 +584,20 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new GoodsCommentConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsDefaultInfoConfiguration());
             modelBuilder.ApplyConfiguration(new GoodsGroupDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new GoodsLogConfiguration());
+            modelBuilder.ApplyConfiguration(new GoodsModelConfiguration());
+            modelBuilder.ApplyConfiguration(new GoodsModelValueConfiguration());
 
            
 
 
            
 
-
            
 
-            modelBuilder.Entity<GoodsLog>(entity =>
-            {
-                entity.HasIndex(e => e.CreatorUserId)
-                    .HasName("Index_CreatorUserId");
+          
 
-                entity.HasIndex(e => e.GoodsId)
-                    .HasName("Index_GoodsId");
-
-                entity.HasIndex(e => e.GoodsName)
-                    .HasName("Index_GoodsName");
-
-                entity.HasIndex(e => e.UserName)
-                    .HasName("Index_UserName");
-
-                entity.Property(e => e.CreationTime).HasColumnType("datetime");
-
-                entity.Property(e => e.GoodsName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.Remark).HasMaxLength(200);
-
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasDefaultValueSql("('')");
-            });
-
-            modelBuilder.Entity<GoodsModel>(entity =>
-            {
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<GoodsModelValue>(entity =>
-            {
-                entity.HasIndex(e => e.GoodsId)
-                    .HasName("IX_GoodsModelType");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Value)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-            });
+           
 
             modelBuilder.Entity<GoodsPackage>(entity =>
             {
