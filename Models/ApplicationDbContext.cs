@@ -557,6 +557,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DeptTempConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new DistributionCustomerInvoiceDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new DistributionCustomerReceiveMoneyConfiguration());
 
 
 
@@ -577,52 +578,7 @@ namespace ERP_API.Models
 
 
 
-
-            modelBuilder.Entity<DistributionCustomerReceiveMoney>(entity =>
-            {
-                entity.Property(e => e.BranchId).HasComment("收款方");
-
-                entity.Property(e => e.ChargeOff)
-                    .HasColumnType("money")
-                    .HasComment("销账金额，与订单的销账金额相等");
-
-                entity.Property(e => e.CustomerId).HasComment("付款方");
-
-                entity.Property(e => e.CustomerName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasComment("付款方名称");
-
-                entity.Property(e => e.Memo)
-                    .HasMaxLength(500)
-                    .HasComment("收款备注");
-
-                entity.Property(e => e.Operate)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .HasComment("操作类型");
-
-                entity.Property(e => e.PayType)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("支付方式");
-
-                entity.Property(e => e.ReceiveAccount).HasComment("付款账户，Sys_BranchBankInfo的编号");
-
-                entity.Property(e => e.ReceiveDate)
-                    .HasColumnType("datetime")
-                    .HasComment("收款日期");
-
-                entity.Property(e => e.ReceiveMoney)
-                    .HasColumnType("money")
-                    .HasComment("实际收款金额");
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-
-                entity.Property(e => e.UserId).HasComment("收款操作人");
-            });
+            
 
             modelBuilder.Entity<DistributionCustomerReceiveMoneyDetail>(entity =>
             {
