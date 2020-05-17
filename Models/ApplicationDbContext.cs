@@ -570,7 +570,8 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfiguration(new DistributionReceiveMoneyDetailConfiguration());
             modelBuilder.ApplyConfiguration(new DostatementConfiguration());
             modelBuilder.ApplyConfiguration(new DostatementDetailConfiguration());
-          
+            modelBuilder.ApplyConfiguration(new DpstatementConfiguration());
+            modelBuilder.ApplyConfiguration(new DpstatementDetailConfiguration());
 
           
 
@@ -580,96 +581,9 @@ namespace ERP_API.Models
 
            
 
-            modelBuilder.Entity<Dpstatement>(entity =>
-            {
-                entity.ToTable("DPStatement");
+           
 
-                entity.HasComment("分销商对账");
-
-                entity.HasIndex(e => e.BranchId)
-                    .HasName("IX_BranchId");
-
-                entity.HasIndex(e => e.InvoiceStatus)
-                    .HasName("IX_InvoiceStatus");
-
-                entity.HasIndex(e => e.PayStatus)
-                    .HasName("IX_PayStatus");
-
-                entity.HasIndex(e => e.SupplierId)
-                    .HasName("IX_PurchaseStatement");
-
-                entity.Property(e => e.BranchId).HasComment("租户");
-
-                entity.Property(e => e.ChargeOff)
-                    .HasColumnType("money")
-                    .HasComment("销账金额");
-
-                entity.Property(e => e.InvoiceApplyMoney)
-                    .HasColumnType("money")
-                    .HasComment("收票申请金额");
-
-                entity.Property(e => e.InvoiceChargeOff)
-                    .HasColumnType("money")
-                    .HasComment("收票销账金额");
-
-                entity.Property(e => e.InvoiceMoney)
-                    .HasColumnType("money")
-                    .HasComment("收票金额");
-
-                entity.Property(e => e.InvoiceStatus)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('未收票')")
-                    .HasComment("未收票、已收票、部分收票");
-
-                entity.Property(e => e.Memo)
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasComment("备注");
-
-                entity.Property(e => e.PaidApplyMoney)
-                    .HasColumnType("money")
-                    .HasComment("付款申请金额");
-
-                entity.Property(e => e.PaidMoney)
-                    .HasColumnType("money")
-                    .HasComment("收款金额");
-
-                entity.Property(e => e.PayStatus)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('未付款')")
-                    .HasComment("未付款、已付款、部分付款");
-
-                entity.Property(e => e.SumMoney)
-                    .HasColumnType("money")
-                    .HasComment("对账单总额");
-
-                entity.Property(e => e.SupplierId).HasComment("分销商");
-
-                entity.Property(e => e.UpdateAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())")
-                    .HasComment("操作时间");
-
-                entity.Property(e => e.UpdateBy).HasComment("操作人");
-            });
-
-            modelBuilder.Entity<DpstatementDetail>(entity =>
-            {
-                entity.ToTable("DPStatementDetail");
-
-                entity.HasComment("分销商对账明细");
-
-                entity.HasIndex(e => e.DpstatementId)
-                    .HasName("IX_DPStatementId");
-
-                entity.HasIndex(e => e.OrderId)
-                    .HasName("IX_OrderId");
-
-                entity.Property(e => e.DpstatementId).HasColumnName("DPStatementId");
-            });
+           
 
             modelBuilder.Entity<EmailInvoiceSetting>(entity =>
             {
