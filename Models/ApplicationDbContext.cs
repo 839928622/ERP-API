@@ -590,46 +590,9 @@ namespace ERP_API.Models
             //modelBuilder.ApplyConfiguration(new GoodsPackageConfiguration());
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
-            modelBuilder.Entity<IBeiJingGoods>(entity =>
-            {
-                entity.ToTable("I_BeiJingGoods");
+            
 
-                entity.Property(e => e.IBrand)
-                    .HasColumnName("I_Brand")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ICategory)
-                    .HasColumnName("I_Category")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.IProductId)
-                    .HasColumnName("I_ProductId")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.IProductName)
-                    .HasColumnName("I_ProductName")
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.ISalePrice)
-                    .HasColumnName("I_SalePrice")
-                    .HasColumnType("decimal(18, 2)");
-            });
-
-            modelBuilder.Entity<IBeiJingGoodsMap>(entity =>
-            {
-                entity.ToTable("I_BeiJingGoodsMap");
-
-                entity.Property(e => e.IBeiJingProductId)
-                    .IsRequired()
-                    .HasColumnName("I_BeiJingProductId")
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
-
-                entity.Property(e => e.UpdateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
+            
 
             modelBuilder.Entity<IBeiJingProductParam>(entity =>
             {
