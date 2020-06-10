@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using ERP_API.HubConfiguration;
 using ERP_API.Models;
 using ERP_API.Service.PrincipalAccessor;
 using IdentityModel;
@@ -93,6 +94,7 @@ namespace ERP_API
             });
 
             services.AddHttpContextAccessor();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -159,6 +161,7 @@ namespace ERP_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<AdvancedSettingHub>("/AdvancedSetting");
             });
         }
     }
