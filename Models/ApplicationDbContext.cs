@@ -460,18 +460,21 @@ namespace ERP_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                if (string.IsNullOrEmpty(_branchIdString))
+                if (string.IsNullOrEmpty(_branchIdString) && System.Environment.GetEnvironmentVariable($"{_branchIdString}") != null)
                 {
-                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable("ERPDB") ?? throw new InvalidOperationException("Can not read ConnecttingString from EnvironmentVariable"));
 
+                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable($"{_branchIdString}") ??
+                                                throw new InvalidOperationException
+                                                ("Can not read ConnecttingString from EnvironmentVariable"));
                 }
                 else
                 {
-                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable($"{_branchIdString}") ??
-                                                throw new InvalidOperationException(
-                                                    "Can not read ConnecttingString from EnvironmentVariable"));
+                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable("ERPDB") ?? 
+                                                throw new InvalidOperationException
+                                                    ("Can not read ConnecttingString from EnvironmentVariable"));
                 }
             }
+            this.Database.Migrate(); // not sure if this block of code work correctly
         }
         public void SetGlobalQuery<T>(ModelBuilder builder) where T: BaseEntity
         {
