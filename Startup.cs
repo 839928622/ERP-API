@@ -99,7 +99,7 @@ namespace ERP_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-             Migration();
+            MultitenancyMigrator.Migrate();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -119,19 +119,6 @@ namespace ERP_API
             });
         }
 
-        private void Migration()
-        {
-            Mock<IHttpContextAccessor> httpContextAccessor = new Mock<IHttpContextAccessor>();
-            var httpContext = new Mock<HttpContext>(); 
-            httpContext.Setup(x => x.User.FindFirst(CustomizedClaims.BranchId)).Returns(new Claim(CustomizedClaims.BranchId,"1"));
-            //_accessor = new Mock<IHttpContextAccessor>();
-            //_accessor.Setup(x => x.HttpContext).Returns(httpContext);
-            httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext.Object);
-
-
-            using var applicationDbContext = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>(), httpContextAccessor.Object);
-            applicationDbContext.Database.Migrate();
-        }
     }
     public class StartupProduction
     {
