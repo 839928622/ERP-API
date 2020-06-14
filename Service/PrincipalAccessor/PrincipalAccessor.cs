@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace ERP_API.Service.PrincipalAccessor
 {
@@ -15,7 +11,7 @@ namespace ERP_API.Service.PrincipalAccessor
         {
             _httpContextAccessor = httpContextAccessor;
         }
-       
-        public ClaimsPrincipal Principal  => _httpContextAccessor.HttpContext?.User;
+
+        public ClaimsPrincipal Principal => _httpContextAccessor.HttpContext?.User;
     }
 }

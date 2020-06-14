@@ -8,7 +8,7 @@ namespace ERP_API.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<DeliveryLine> builder)
         {
-            builder.HasIndex(e => new {e.BranchId, e.LineName})
+            builder.HasIndex(e => new { e.BranchId, e.LineName })
                 .HasName("IX_DeliveryLine")
                 .IsUnique();
 

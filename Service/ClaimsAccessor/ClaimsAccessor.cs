@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ERP_API.Infrastructure;
+﻿using ERP_API.Infrastructure;
 using ERP_API.Service.ClaimAccessor;
 using ERP_API.Service.PrincipalAccessor;
 using IdentityModel;
+using System;
+using System.Linq;
 
 namespace ERP_API.Service.ClaimsAccessor
 {
@@ -17,14 +15,15 @@ namespace ERP_API.Service.ClaimsAccessor
         {
             PrincipalAccessor = principalAccessor;
         }
-        public string UserId {
-           
-                get
-                {
-                    var userId = PrincipalAccessor.Principal?.Claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Subject)?.Value;
-                    return userId;
-                }
-            
+        public string UserId
+        {
+
+            get
+            {
+                var userId = PrincipalAccessor.Principal?.Claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Subject)?.Value;
+                return userId;
+            }
+
         }
 
         public int UserBranchId

@@ -1,9 +1,6 @@
 ﻿using ERP_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ERP_API.Service.Orders
@@ -20,13 +17,13 @@ namespace ERP_API.Service.Orders
         }
         public async Task<SysBranchSetting> GetBranchSetting(int branchId)
         {
-          var branchSetting =  _memoryCache.Get<SysBranchSetting>(branchId);
+            var branchSetting = _memoryCache.Get<SysBranchSetting>(branchId);
             if (branchSetting != null)
             {
                 return branchSetting;
             }
-             return await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync(x => x.BranchId == branchId);
-           
+            return await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync(x => x.BranchId == branchId);
+
         }
     }
 }

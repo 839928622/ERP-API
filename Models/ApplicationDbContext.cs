@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ERP_API.Infrastructure;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ERP_API.EntityConfigurations;
-using ERP_API.Infrastructure;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace ERP_API.Models
 {
@@ -15,16 +15,22 @@ namespace ERP_API.Models
         private readonly string _branchIdString;
         private readonly int _branchId;
         public bool CheckAccrossBranchIdOprations { get; set; } = true;
+
         public ApplicationDbContext()
         {
+
         }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
-            _branchIdString =  httpContextAccessor.HttpContext.User.FindFirst(CustomizedClaims.BranchId).Value;
-            _branchId =  Convert.ToInt32(_branchIdString);
+            // these block of code need to be coment out when add migrations and database update  e.g. dotnet ef migrations add InitialMigration  -c ApplicationDbContext
+            //this._branchIdString = httpContextAccessor.HttpContext.User.FindFirst(CustomizedClaims.BranchId).Value;
+            //this._branchId = Convert.ToInt32(_branchIdString);
         }
+
+        
 
         public virtual DbSet<AttachedFil> AttachedFil { get; set; }
         public virtual DbSet<Brand> Brand { get; set; }
@@ -469,14 +475,18 @@ namespace ERP_API.Models
                 }
                 else
                 {
-                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable("ERPDB") ?? 
+                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable("ERPDB") ??
                                                 throw new InvalidOperationException
                                                     ("Can not read ConnecttingString from EnvironmentVariable"));
                 }
             }
-            this.Database.Migrate(); // not sure if this block of code work correctly
+
+            //if (this.Database.GetPendingMigrations().Any())
+            //{
+            //    this.Database.Migrate(); // not sure if this block of code work correctly => this wont work 
+            //}
         }
-        public void SetGlobalQuery<T>(ModelBuilder builder) where T: BaseEntity
+        public void SetGlobalBranchQueryFilter<T>(ModelBuilder builder) where T : BaseEntity
         {
             builder.Entity<T>().HasKey(e => e.Id);
             builder.Entity<T>().HasQueryFilter(e => e.BranchId == _branchId);//全表过滤
@@ -515,13 +525,13 @@ namespace ERP_API.Models
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
-      
+
 
         private void CheckAccrossBranchOpration()
         {
             var ids = (from e in ChangeTracker.Entries()
-                    where e.Entity is BaseEntity
-                    select ((BaseEntity) e.Entity).BranchId)
+                       where e.Entity is BaseEntity
+                       select ((BaseEntity)e.Entity).BranchId)
                 .Distinct().ToList();
             if (ids.Count == 0)
             {
@@ -530,7 +540,7 @@ namespace ERP_API.Models
 
             if (ids.Count > 1)
             {
-                throw new CrossBranchOperationException($"EF检测到跨Branch操作，当前Branch:{_branchId},跨越Branch为：[{string.Join(',',ids)}]");
+                throw new CrossBranchOperationException($"EF检测到跨Branch操作，当前Branch:{_branchId},跨越Branch为：[{string.Join(',', ids)}]");
             }
 
             if (ids.First() != _branchId)
@@ -592,10 +602,10 @@ namespace ERP_API.Models
             //modelBuilder.ApplyConfiguration(new GoodsModelValueConfiguration());
             //modelBuilder.ApplyConfiguration(new GoodsPackageConfiguration());
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            SetGlobalBranchQueryFilter<Brand>(modelBuilder);
 
-            
 
-            
+
 
             modelBuilder.Entity<IBeiJingProductParam>(entity =>
             {
@@ -15104,6 +15114,6 @@ namespace ERP_API.Models
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-      
+
     }
 }

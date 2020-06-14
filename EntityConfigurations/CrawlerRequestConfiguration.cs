@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ERP_API.Models;
+﻿using ERP_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ERP_API.EntityConfigurations
 {
-    public class CrawlerRequestConfiguration :IEntityTypeConfiguration<CrawlerRequest>
+    public class CrawlerRequestConfiguration : IEntityTypeConfiguration<CrawlerRequest>
     {
         public void Configure(EntityTypeBuilder<CrawlerRequest> builder)
         {
@@ -29,7 +25,7 @@ namespace ERP_API.EntityConfigurations
                 .IsRequired()
                 .HasMaxLength(500)
                 .IsUnicode(false);
-           
+
         }
     }
 }

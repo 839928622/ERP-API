@@ -8,15 +8,24 @@ namespace ERP_API.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.HasIndex(e => new {e.BranchId, e.Name})
+            builder.HasIndex(e => new { e.BranchId, e.Name })
                 .HasName("IX_Customer")
                 .IsUnique();
 
             builder.HasIndex(e => new
-                {
-                    e.Id, e.Name, e.Type, e.Status, e.EmployeesNum, e.Telphone, e.SalesId, e.PayMethod, e.CreditDays,
-                    e.BranchId, e.PayType
-                })
+            {
+                e.Id,
+                e.Name,
+                e.Type,
+                e.Status,
+                e.EmployeesNum,
+                e.Telphone,
+                e.SalesId,
+                e.PayMethod,
+                e.CreditDays,
+                e.BranchId,
+                e.PayType
+            })
                 .HasName("<Name of Missing Index, sysname,>");
 
             builder.Property(e => e.AddTime)

@@ -1,13 +1,13 @@
-﻿using System;
-using ERP_API.Infrastructure;
+﻿using ERP_API.Infrastructure;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 
 namespace ERP_API.Controllers
 {
-   
+
     [Authorize]
     [ApiController]
     public class BaseController : ControllerBase

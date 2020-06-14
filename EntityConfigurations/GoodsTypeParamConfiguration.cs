@@ -8,7 +8,7 @@ namespace ERP_API.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<GoodsTypeParam> builder)
         {
-            builder.HasIndex(e => new {e.GroupId, e.Name})
+            builder.HasIndex(e => new { e.GroupId, e.Name })
                 .HasName("IX_GoodsTypeParams")
                 .IsUnique();
 

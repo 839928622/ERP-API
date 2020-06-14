@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ERP_API.Models
+﻿namespace ERP_API.Models
 {
     public partial class ViewOrderDetailGoods
     {

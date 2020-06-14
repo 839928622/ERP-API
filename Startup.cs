@@ -1,23 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
 using ERP_API.HubConfiguration;
 using ERP_API.Models;
 using ERP_API.Service.PrincipalAccessor;
-using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ERP_API
 {
@@ -33,7 +27,7 @@ namespace ERP_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-         
+
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options => { });//不在这里进行配置
             services.AddMemoryCache();//使用缓存 测试环境，暂时不用数据库
@@ -63,7 +57,7 @@ namespace ERP_API
                     options.SupportedTokens = SupportedTokens.Reference;
                     options.EnableCaching = true;
                     options.CacheDuration = TimeSpan.FromSeconds(300);
-                   
+
                 });
             services.AddAuthorization();
 
@@ -79,7 +73,7 @@ namespace ERP_API
             //               referenceOptions.Authority = "http://localhost:6566";
             //               referenceOptions.ClientId = "ERP-API";
             //               referenceOptions.ClientSecret = "secret";
-                           
+
             //               referenceOptions.EnableCaching = true;
             //               referenceOptions.CacheDuration = TimeSpan.Zero;
             //        });
@@ -111,12 +105,15 @@ namespace ERP_API
             app.UseRouting();
             app.UseAuthentication();//解决你是谁的问题
             app.UseAuthorization();//解决 你可以干什么的问题
-         
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<AdvancedSettingHub>("/AdvancedSetting");
             });
         }
+
+        
     }
     public class StartupProduction
     {
@@ -139,7 +136,7 @@ namespace ERP_API
                     options.Audience = "ERP-API";//
                     options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
                     options.TokenValidationParameters.RequireExpirationTime = true;
-                   
+
                 });
             services.AddHttpContextAccessor();
         }
@@ -179,6 +176,7 @@ namespace ERP_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHttpContextAccessor();
             //services.AddAuthentication("Bearer")
             //    .AddJwtBearer("Bearer", options =>
             //    {

@@ -11,7 +11,7 @@ namespace ERP_API.EntityConfigurations
             builder.HasIndex(e => e.GoodsId)
                 .HasName("IX_GoodsParamValue");
 
-            builder.HasIndex(e => new {e.ParamId, e.Value})
+            builder.HasIndex(e => new { e.ParamId, e.Value })
                 .HasName("IX_GoodsParamValue_1");
 
             builder.Property(e => e.GroupName)
