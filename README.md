@@ -7,6 +7,7 @@ To develope ERP-API, you need to install the following components:
 * Visual Studio or Visual Studio Code(may need to install multi extentions) 
 * [.Net Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.301-windows-x64-installer)
 * PostMan
+
 I **strongly suggest** using [Visual Studio](https://visualstudio.microsoft.com/) to develope this project.
 ## How to run
 Excute following command in the root directory of this repository to restore all dependencies.
