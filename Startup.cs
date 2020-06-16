@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using ERP_API.Infrastructure;
+using ERP_API.Service.BrandSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -94,6 +95,7 @@ namespace ERP_API
 
             services.AddHttpContextAccessor();
             services.AddSignalR();
+            services.AddTransient<IBranchSettingService, BranchSettingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,7 +113,7 @@ namespace ERP_API
             app.UseRouting();
             app.UseAuthentication();//解决你是谁的问题
             app.UseAuthorization();//解决 你可以干什么的问题
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
