@@ -1,5 +1,6 @@
 ## How to develope
 ### Before starting
+ERP-API is protected by a Identity Service Provider,so you may need to check my another repository  [here](https://github.com/zlzforever/IdentityServer4.Admin)
 
 To develope ERP-API, you need to install the following components:
 
