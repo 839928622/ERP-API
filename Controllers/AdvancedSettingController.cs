@@ -1,5 +1,6 @@
 ﻿using ERP_API.HubConfiguration;
 using ERP_API.Service.BrandSettings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -7,6 +8,7 @@ namespace ERP_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AdvancedSettingController : ControllerBase
     {
         private readonly IHubContext<AdvancedSettingHub> _advancedHub;
