@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ERP_API.HubConfiguration;
 using ERP_API.HubDataSimulator;
+using ERP_API.Models;
 using ERP_API.Service.BrandSettings;
 using ERP_API.TimerFeatures;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +15,7 @@ namespace ERP_API.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class AdvancedSettingController : ControllerBase
     {
         private readonly IHubContext<AdvancedSettingHub> _advancedHub;
@@ -29,13 +30,22 @@ namespace ERP_API.Controllers
         [HttpGet]
         public   IActionResult Get(int branchId)
         {
+            var ss = _branchSettingService.GetBranchSetting(branchId).Result;
             // _branchSettingService.GetBranchSetting(branchId)
-          
-            var timerManager = new TimerManager(() =>  _advancedHub.Clients.All.SendAsync("branchSettings", DataManager.GetListInt()));    
+
+            var timerManager = new TimerManager(() =>  _advancedHub.Clients.All.SendAsync("branchSettings", _branchSettingService.GetBranchSetting(branchId)));    
              
             
             
             return Ok(new { message = "消息已发出" });
+        }
+
+        [HttpPost]
+       // [Authorize(Roles = "BranchOwner")] could add some Authorize policy later
+        public IActionResult UpdateBranchSetting(SysBranchSetting model)
+        {
+            _advancedHub.Clients.All.SendAsync("branchSettings", model);
+            return Ok();
         }
     }
 }
