@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class SysBranchSetting
+    public partial class SysBranchSetting : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+       
         public DateTime UpdateTime { get; set; }
         public bool OrderConfirmGift { get; set; }
         public bool OrderConfirmPriceLessInPrice { get; set; }

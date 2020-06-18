@@ -16,7 +16,7 @@ namespace ERP_API.Controllers
     [Route("[controller]/[action]")]
     [ApiController]
     [Authorize]
-    public class AdvancedSettingController : ControllerBase
+    public class AdvancedSettingController : BaseController
     {
         private readonly IHubContext<AdvancedSettingHub> _advancedHub;
         private readonly IBranchSettingService _branchSettingService;
@@ -28,12 +28,11 @@ namespace ERP_API.Controllers
             this._branchSettingService = branchSettingService;
         }
         [HttpGet]
-        public   IActionResult Get(int branchId)
+        public   IActionResult Get() // client push a request to start a room/channel/connection
         {
-            var ss = _branchSettingService.GetBranchSetting(branchId).Result;
             // _branchSettingService.GetBranchSetting(branchId)
-
-            var timerManager = new TimerManager(() =>  _advancedHub.Clients.All.SendAsync("branchSettings", _branchSettingService.GetBranchSetting(branchId)));    
+            
+            var timerManager = new TimerManager(() =>  _advancedHub.Clients.All.SendAsync($"branchSettings-{UserBranchIdString}", _branchSettingService.GetBranchSetting(UserBranchId)));    
              
             
             
@@ -44,7 +43,7 @@ namespace ERP_API.Controllers
        // [Authorize(Roles = "BranchOwner")] could add some Authorize policy later
         public IActionResult UpdateBranchSetting(SysBranchSetting model)
         {
-            _advancedHub.Clients.All.SendAsync("branchSettings", model);
+            _advancedHub.Clients.All.SendAsync($"branchSettings-{UserBranchIdString}", model);
             return Ok();
         }
     }

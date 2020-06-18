@@ -22,7 +22,7 @@ namespace ERP_API.Service.BrandSettings
             {
                 return branchSetting;
             }
-            var res = await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync(x => x.BranchId == branchId);
+            var res = await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync();
             _memoryCache.Set(branchId, res);
             return res;
         }

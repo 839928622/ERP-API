@@ -603,7 +603,7 @@ namespace ERP_API.Models
             //modelBuilder.ApplyConfiguration(new GoodsPackageConfiguration());
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             SetGlobalBranchQueryFilter<Brand>(modelBuilder);
-
+            SetGlobalBranchQueryFilter<SysBranchSetting>(modelBuilder);
 
 
 
