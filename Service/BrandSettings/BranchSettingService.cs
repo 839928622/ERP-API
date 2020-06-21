@@ -1,4 +1,5 @@
-﻿using ERP_API.Models;
+﻿using System.Linq;
+using ERP_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
@@ -15,14 +16,14 @@ namespace ERP_API.Service.BrandSettings
             this._memoryCache = memoryCache;
             this._applicationDbContext = applicationDbContext;
         }
-        public async Task<SysBranchSetting> GetBranchSetting(int branchId)
+        public  SysBranchSetting GetBranchSetting(int branchId)
         {
             var branchSetting = _memoryCache.Get<SysBranchSetting>(branchId);
             if (branchSetting != null)
             {
                 return branchSetting;
             }
-            var res = await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync();
+            var res =  _applicationDbContext.SysBranchSetting.FirstOrDefault();
             _memoryCache.Set(branchId, res);
             return res;
         }

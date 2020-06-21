@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class Customer
+    public partial class Customer : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+        
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string Type { get; set; }

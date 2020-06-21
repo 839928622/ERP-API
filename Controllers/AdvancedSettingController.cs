@@ -30,9 +30,10 @@ namespace ERP_API.Controllers
         [HttpGet]
         public   IActionResult Get() // client push a request to start a room/channel/connection
         {
-            // _branchSettingService.GetBranchSetting(branchId)
+            // synchronized function
+            var setting = _branchSettingService.GetBranchSetting(UserBranchId);
             
-            var timerManager = new TimerManager(() =>  _advancedHub.Clients.All.SendAsync($"branchSettings-{UserBranchIdString}", _branchSettingService.GetBranchSetting(UserBranchId)));    
+             _advancedHub.Clients.All.SendAsync($"branchSettings-{UserBranchIdString}", setting);    
              
             
             

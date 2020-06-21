@@ -604,6 +604,7 @@ namespace ERP_API.Models
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             SetGlobalBranchQueryFilter<Brand>(modelBuilder);
             SetGlobalBranchQueryFilter<SysBranchSetting>(modelBuilder);
+            SetGlobalBranchQueryFilter<Customer>(modelBuilder);
 
 
 
