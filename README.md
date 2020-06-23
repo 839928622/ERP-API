@@ -1,11 +1,8 @@
 <p align="center">
     <h3 align="center">ERP-API</h3>
     <p align="center">ERP-API is a cross-platform app build by .net core.<p>
-    <p align="center">
-     [![Build Status](https://dev.azure.com/jwk8399286220658/ERP-CD-CD%20Organization/_apis/build/status/839928622.ERP-API?  branchName=master)](https://dev.azure.com/jwk8399286220658/ERP-CD-CD%20Organization/_build/latest?definitionId=1&branchName=master)
-     </p>
 </p>
-
+[![Build Status](https://dev.azure.com/jwk8399286220658/ERP-CD-CD%20Organization/_apis/build/status/839928622.ERP-API?  branchName=master)](https://dev.azure.com/jwk8399286220658/ERP-CD-CD%20Organization/_build/latest?definitionId=1&branchName=master)
 ## How to develope
 ### Before starting
 ERP-API is protected by a Identity Service Provider,so you may need to check my another repository  [here](https://github.com/zlzforever/IdentityServer4.Admin)
