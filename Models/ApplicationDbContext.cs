@@ -6111,7 +6111,7 @@ namespace ERP_API.Models
                 entity.Property(e => e.IsRepeatGoodsSn).HasColumnName("IsRepeatGoodsSN");
 
                 entity.Property(e => e.IsShowInvalidPurchaser).HasDefaultValueSql("((0))");
-
+                entity.Property(e => e.StocktakingAudit).HasDefaultValueSql("((0))");
                 entity.Property(e => e.OrderConfirmGift)
                     .HasColumnName("OrderConfirm_Gift")
                     .HasComment("订单审核：赠品模式时  1 开启此功能 0 不开启此功能");

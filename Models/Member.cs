@@ -4,7 +4,7 @@ namespace ERP_API.Models
 {
     public partial class Member
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int CustomerId { get; set; }
         public int DeptId { get; set; }
         public string LoginName { get; set; }

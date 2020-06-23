@@ -54,5 +54,6 @@ namespace ERP_API.Models
         public bool StoreOrderSpicifyInventory { get; set; }
         public bool PurchaseByOwin { get; set; }
         public bool ExportByAdmin { get; set; }
+        public bool StocktakingAudit { get; set; }
     }
 }
