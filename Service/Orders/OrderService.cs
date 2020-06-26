@@ -1,7 +1,10 @@
-﻿using ERP_API.Models;
+﻿using System.Linq;
+using ERP_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
+using ERP_API.Dtos.Orders;
+using Mapster;
 
 namespace ERP_API.Service.Orders
 {
@@ -24,6 +27,19 @@ namespace ERP_API.Service.Orders
             }
             return await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync(x => x.BranchId == branchId);
 
+        }
+
+        public NewOrderBranchList[] GetBranchLists(int branchId)
+        {
+            var isLeadBranch = _applicationDbContext.ViewSysBranchGroup.Where(x => x.Id == branchId && x.JoinType == "总公司");
+            if (isLeadBranch.Any())
+            {
+                return _applicationDbContext.ViewSysBranchGroup.Where(x => x.LeaderBranchId == branchId)
+                    .ProjectToType<NewOrderBranchList>().ToArray();
+            }
+
+            return _applicationDbContext.ViewSysBranchGroup.Where(x => x.Id == branchId)
+                .ProjectToType<NewOrderBranchList>().ToArray();
         }
     }
 }
