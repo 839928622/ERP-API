@@ -8,5 +8,6 @@ namespace ERP_API.Service.Orders
     {
         public  Task<SysBranchSetting> GetBranchSetting(int branchId);
         public NewOrderBranchList[] GetBranchLists(int branchId);
+        public SalespersonList[] ReadSalespersonList(int branchId);
     }
 }

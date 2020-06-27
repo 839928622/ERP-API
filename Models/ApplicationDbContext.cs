@@ -7275,7 +7275,6 @@ namespace ERP_API.Models
                 entity.Property(e => e.BirthDay)
                     .HasColumnType("datetime")
                     .HasComment("生日");
-
                 entity.Property(e => e.BranchId).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.DingId)
@@ -7307,7 +7306,10 @@ namespace ERP_API.Models
                 entity.Property(e => e.ModifyTime)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
-
+                entity.Property(e => e.Uuid)
+                    .IsRequired()
+                    .HasColumnType("uniqueidentifier");
+                    
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50)

@@ -2,13 +2,12 @@
 
 namespace ERP_API.Models
 {
-    public partial class SysUsers
+    public partial class SysUsers : BaseEntity
     {
-        public int Id { get; set; }
+        public string Uuid { get; set; }
         public string LoginName { get; set; }
         public string PassWord { get; set; }
         public string Name { get; set; }
-        public int BranchId { get; set; }
         public int DeptId { get; set; }
         public bool IsSales { get; set; }
         public string Position { get; set; }

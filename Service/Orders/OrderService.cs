@@ -41,5 +41,11 @@ namespace ERP_API.Service.Orders
             return _applicationDbContext.ViewSysBranchGroup.Where(x => x.Id == branchId)
                 .ProjectToType<NewOrderBranchList>().ToArray();
         }
+
+        public SalespersonList[] ReadSalespersonList(int branchId)
+        {
+            return _applicationDbContext.SysUsers.Where(x => x.BranchId == branchId).ProjectToType<SalespersonList>()
+                .ToArray();
+        }
     }
 }
