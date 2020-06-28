@@ -608,79 +608,10 @@ namespace ERP_API.Models
 
 
 
-            modelBuilder.Entity<IBeiJingProductParam>(entity =>
-            {
-                entity.ToTable("I_BeiJingProductParam");
+          
 
-                entity.Property(e => e.IParamName)
-                    .HasColumnName("I_ParamName")
-                    .HasMaxLength(255);
 
-                entity.Property(e => e.IParamValue)
-                    .HasColumnName("I_ParamValue")
-                    .HasColumnType("text");
-
-                entity.Property(e => e.IProductId)
-                    .HasColumnName("I_ProductId")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.TlspPk)
-                    .HasColumnName("TLSP_PK")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.TppvPk)
-                    .HasColumnName("TPPV_PK")
-                    .HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<IBeiJingZhengCaiCityList>(entity =>
-            {
-                entity.ToTable("I_BeiJingZhengCaiCityList");
-
-                entity.Property(e => e.Code).HasMaxLength(255);
-
-                entity.Property(e => e.Memo).HasMaxLength(255);
-
-                entity.Property(e => e.Name).HasMaxLength(255);
-
-                entity.Property(e => e.Parent).HasMaxLength(255);
-
-                entity.Property(e => e.Type)
-                    .HasColumnName("type")
-                    .HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<ICategory>(entity =>
-            {
-                entity.ToTable("I_Category");
-
-                entity.Property(e => e.Discount).HasColumnType("decimal(8, 4)");
-
-                entity.Property(e => e.Discount2).HasColumnType("decimal(8, 4)");
-
-                entity.Property(e => e.Discount3).HasColumnType("decimal(8, 4)");
-
-                entity.Property(e => e.Discount4).HasColumnType("decimal(8, 4)");
-
-                entity.Property(e => e.ICategory1)
-                    .IsRequired()
-                    .HasColumnName("I_Category")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.IPlatId).HasColumnName("I_PlatId");
-
-                entity.Property(e => e.ITypeCode)
-                    .IsRequired()
-                    .HasColumnName("I_TypeCode")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.ITypeName)
-                    .IsRequired()
-                    .HasColumnName("I_TypeName")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
+            
 
             modelBuilder.Entity<IChengDuCategoryExt>(entity =>
             {

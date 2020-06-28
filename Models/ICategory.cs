@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class ICategory
+    public partial class ICategory : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+      
         public int IPlatId { get; set; }
         public string ITypeCode { get; set; }
         public string ITypeName { get; set; }
