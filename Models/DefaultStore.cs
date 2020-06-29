@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class DefaultStore
+    public partial class DefaultStore : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+        
         public string Name { get; set; }
         public string Place { get; set; }
         public string OrderType { get; set; }

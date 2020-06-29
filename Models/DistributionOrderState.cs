@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class DistributionOrderState
+    public partial class DistributionOrderState : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+        
         public int OrderId { get; set; }
         public bool IsPicked { get; set; }
         public DateTime? PickTime { get; set; }

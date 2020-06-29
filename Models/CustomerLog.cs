@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class CustomerLog
+    public partial class CustomerLog : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+       
         public int CustomerId { get; set; }
         public string Customer { get; set; }
         public int UserId { get; set; }

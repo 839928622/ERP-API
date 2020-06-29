@@ -2,9 +2,8 @@
 
 namespace ERP_API.Models
 {
-    public partial class GoodsType
+    public partial class GoodsType : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Pcode { get; set; }
@@ -17,6 +16,5 @@ namespace ERP_API.Models
         public string DefaultSource { get; set; }
         public DateTime UpdateTime { get; set; }
         public string Py { get; set; }
-        public int BranchId { get; set; }
     }
 }

@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class DeliveryLine
+    public partial class DeliveryLine : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+      
         public string LineName { get; set; }
         public string LineRange { get; set; }
         public DateTime UpdateTime { get; set; }

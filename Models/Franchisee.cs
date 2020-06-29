@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class Franchisee
+    public partial class Franchisee : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+       
         public string CompanyName { get; set; }
         public string CompanyProvince { get; set; }
         public string CompanyCity { get; set; }

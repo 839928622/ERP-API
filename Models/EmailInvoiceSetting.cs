@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class EmailInvoiceSetting
+    public partial class EmailInvoiceSetting : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+        
         public string PlatIdentity { get; set; }
         public string SaleName { get; set; }
         public string SaleBank { get; set; }

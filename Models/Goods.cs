@@ -2,11 +2,10 @@
 
 namespace ERP_API.Models
 {
-    public partial class Goods
+    public partial class Goods : BaseEntity
     {
-        public int Id { get; set; }
         public string Guid { get; set; }
-        public int BranchId { get; set; }
+      
         public int TypeId { get; set; }
         public int BrandId { get; set; }
         public string Sn { get; set; }

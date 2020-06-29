@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class GoodsPriceLog
+    public partial class GoodsPriceLog : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+     
         public int GoodsId { get; set; }
         public decimal OldPrice { get; set; }
         public decimal NewPrice { get; set; }

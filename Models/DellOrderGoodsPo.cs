@@ -2,10 +2,8 @@
 
 namespace ERP_API.Models
 {
-    public partial class DellOrderGoodsPo
+    public partial class DellOrderGoodsPo : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
         public int OrderId { get; set; }
         public int OrderDetailId { get; set; }
         public string Po { get; set; }

@@ -605,161 +605,58 @@ namespace ERP_API.Models
             SetGlobalBranchQueryFilter<Brand>(modelBuilder);
             SetGlobalBranchQueryFilter<SysBranchSetting>(modelBuilder);
             SetGlobalBranchQueryFilter<Customer>(modelBuilder);
+            SetGlobalBranchQueryFilter<IChengDuParamValue>(modelBuilder);
+            SetGlobalBranchQueryFilter<IEfficientGoods>(modelBuilder);
+            SetGlobalBranchQueryFilter<IEgoods>(modelBuilder);
+            SetGlobalBranchQueryFilter<CanvassAgreement>(modelBuilder);
+            SetGlobalBranchQueryFilter<CatagoryParams>(modelBuilder);
+            SetGlobalBranchQueryFilter<CrawlerRequest>(modelBuilder);
+            SetGlobalBranchQueryFilter<CustomerBalanceLog>(modelBuilder);
+            SetGlobalBranchQueryFilter<CustomerLog>(modelBuilder);
+            SetGlobalBranchQueryFilter<CustomerPreReceiveMoney>(modelBuilder);
+            SetGlobalBranchQueryFilter<DefaultStore>(modelBuilder);
+            SetGlobalBranchQueryFilter<DeliveryLine>(modelBuilder); 
+            SetGlobalBranchQueryFilter<DellOrderGoodsPo>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionCustomerInvoice>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionCustomerReceiveMoney>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionInvoice>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionOperation>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionOrderState>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionPay>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionReceiveInvoice>(modelBuilder);
+            SetGlobalBranchQueryFilter<DistributionReceiveMoney>(modelBuilder);
+            SetGlobalBranchQueryFilter<Dpstatement>(modelBuilder);
+            SetGlobalBranchQueryFilter<EmailInvoiceSetting>(modelBuilder);
+            SetGlobalBranchQueryFilter<FinanceSubject>(modelBuilder);
+            SetGlobalBranchQueryFilter<Franchisee>(modelBuilder);
+            SetGlobalBranchQueryFilter<Goods>(modelBuilder);
+            SetGlobalBranchQueryFilter<Goods>(modelBuilder);
+            SetGlobalBranchQueryFilter<GoodsCaptcha>(modelBuilder);
+            SetGlobalBranchQueryFilter<GoodsDefaultInfo>(modelBuilder);
+            SetGlobalBranchQueryFilter<GoodsPriceLog>(modelBuilder);
+            SetGlobalBranchQueryFilter<GoodsType>(modelBuilder);
+            SetGlobalBranchQueryFilter<GoodsTypeParam>(modelBuilder);
+            SetGlobalBranchQueryFilter<GoodsTypePrivateInfo>(modelBuilder);
+            SetGlobalBranchQueryFilter<GroupOrderStatement>(modelBuilder);
+            SetGlobalBranchQueryFilter<IBeiJingGoodsMap>(modelBuilder);
 
 
 
-          
 
 
-            
 
-            modelBuilder.Entity<IChengDuCategoryExt>(entity =>
-            {
-                entity.ToTable("I_ChengDuCategoryExt");
 
-                entity.Property(e => e.Code)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
 
-                entity.Property(e => e.Discount).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.Summoney).HasColumnType("money");
 
-                entity.Property(e => e.UpdateAt).HasColumnType("datetime");
-            });
 
-            modelBuilder.Entity<IChengDuCategoryParam>(entity =>
-            {
-                entity.ToTable("I_ChengDuCategoryParam");
 
-                entity.Property(e => e.Code)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
 
-                entity.Property(e => e.Name).HasMaxLength(100);
 
-                entity.Property(e => e.Type)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
-                entity.Property(e => e.UpdateAt).HasColumnType("datetime");
 
-                entity.Property(e => e.Vals).HasColumnType("text");
-            });
 
-            modelBuilder.Entity<IChengDuParamValue>(entity =>
-            {
-                entity.ToTable("I_ChengDuParamValue");
 
-                entity.Property(e => e.UpdateAt).HasColumnType("datetime");
-
-                entity.Property(e => e.Value)
-                    .IsRequired()
-                    .HasMaxLength(500);
-            });
-
-            modelBuilder.Entity<IEfficientGoods>(entity =>
-            {
-                entity.ToTable("I_EfficientGoods");
-
-                entity.Property(e => e.AddAt).HasColumnType("datetime");
-
-                entity.Property(e => e.AddBy)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EfficientGoodsCardNum)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EfficientGoodsCardOrgan)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EfficientGoodsImagePath)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.GoodsName)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.IprojectId).HasColumnName("IProjectId");
-
-                entity.Property(e => e.Model)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateAt).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<IEgoods>(entity =>
-            {
-                entity.ToTable("I_EGoods");
-
-                entity.HasComment("商品环保标志");
-
-                entity.Property(e => e.CertDate).HasColumnType("datetime");
-
-                entity.Property(e => e.CertNo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdateAt).HasColumnType("datetime");
-
-                entity.Property(e => e.Url)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<IErrLog>(entity =>
-            {
-                entity.ToTable("I_ErrLog");
-
-                entity.Property(e => e.ActionName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.ControllerName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.ErrorMessage)
-                    .IsRequired()
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.JsonStr)
-                    .IsRequired()
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<IGoods>(entity =>
-            {
-                entity.ToTable("I_Goods");
-
-                entity.HasIndex(e => new { e.GoodsId, e.Unit, e.IProjectId })
-                    .HasName("IX_I_Goods")
-                    .IsUnique();
-
-                entity.Property(e => e.Discount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.IProjectId).HasColumnName("I_ProjectId");
-
-                entity.Property(e => e.MarketPrice).HasColumnType("money");
-
-                entity.Property(e => e.Price).HasColumnType("money");
-
-                entity.Property(e => e.Unit)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.UpdateTime).HasColumnType("datetime");
-            });
 
             modelBuilder.Entity<IGoodsLog>(entity =>
             {

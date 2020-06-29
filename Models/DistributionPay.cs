@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class DistributionPay
+    public partial class DistributionPay : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+        
         public int ChildBranchId { get; set; }
         public decimal ChargeOff { get; set; }
         public decimal PayMoney { get; set; }

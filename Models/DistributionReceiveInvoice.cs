@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class DistributionReceiveInvoice
+    public partial class DistributionReceiveInvoice : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+       
         public int ChildBranchId { get; set; }
         public int InvoiceType { get; set; }
         public string InvoiceNo { get; set; }

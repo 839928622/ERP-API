@@ -2,12 +2,11 @@
 
 namespace ERP_API.Models
 {
-    public partial class CanvassAgreement
+    public partial class CanvassAgreement : BaseEntity
     {
-        public int Id { get; set; }
         public string AgreementContent { get; set; }
         public int UserId { get; set; }
         public DateTime AddTime { get; set; }
-        public int BranchId { get; set; }
+       
     }
 }

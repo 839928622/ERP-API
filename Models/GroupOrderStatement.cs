@@ -2,10 +2,9 @@
 
 namespace ERP_API.Models
 {
-    public partial class GroupOrderStatement
+    public partial class GroupOrderStatement : BaseEntity
     {
-        public int Id { get; set; }
-        public int BranchId { get; set; }
+
         public decimal SumMoney { get; set; }
         public decimal PaidMoney { get; set; }
         public string PayStatus { get; set; }
