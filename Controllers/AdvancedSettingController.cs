@@ -27,6 +27,17 @@ namespace ERP_API.Controllers
             _advancedHub = advancedContext;
             this._branchSettingService = branchSettingService;
         }
+
+        public async Task<IActionResult> JoinGroup(string connectionId,string groupName)
+        {
+            await _advancedHub.Groups.AddToGroupAsync(connectionId, groupName);
+            return Ok();
+        }
+        public async Task<IActionResult> LeaveGroup(string connectionId, string groupName)
+        {
+            await _advancedHub.Groups.RemoveFromGroupAsync(connectionId,groupName);
+            return Ok();
+        }
         [HttpGet]
         public   IActionResult Get() // client push a request to start a room/channel/connection
         {
