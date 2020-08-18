@@ -14,5 +14,7 @@ namespace ERP_API.HubConfiguration
         /// <returns></returns>
         public async Task BroadcastAdvancedSetting(SysBranchSetting model) =>
             await Clients.All.SendAsync("broadcastAdvancedSetting", model);
+
+        public string GetConnectionId() => Context.ConnectionId;
     }
 }

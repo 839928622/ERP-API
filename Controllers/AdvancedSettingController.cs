@@ -27,15 +27,25 @@ namespace ERP_API.Controllers
             _advancedHub = advancedContext;
             this._branchSettingService = branchSettingService;
         }
-
-        public async Task<IActionResult> JoinGroup(string connectionId,string groupName)
+        [HttpPost("/{connectionId}")]
+        public async Task<IActionResult> JoinGroup(string connectionId)
         {
-            await _advancedHub.Groups.AddToGroupAsync(connectionId, groupName);
+            // consider branchId  a group name , so all branch member automate be in a group
+            await _advancedHub.Groups.AddToGroupAsync(connectionId, UserBranchIdString);
             return Ok();
         }
-        public async Task<IActionResult> LeaveGroup(string connectionId, string groupName)
+        [HttpPost("/{connectionId}")]
+        public async Task<IActionResult> LeaveGroup(string connectionId)
         {
-            await _advancedHub.Groups.RemoveFromGroupAsync(connectionId,groupName);
+            await _advancedHub.Groups.RemoveFromGroupAsync(connectionId,UserBranchIdString);
+            return Ok();
+        }
+
+        [HttpPost]
+        // [Authorize(Roles = "BranchOwner")] could add some Authorize policy later
+        public IActionResult UpdateBranchSetting(SysBranchSetting model)
+        {
+            _advancedHub.Clients.Group(UserBranchIdString).SendAsync($"branchSettings-{UserBranchIdString}", model);
             return Ok();
         }
         [HttpGet]
@@ -44,19 +54,10 @@ namespace ERP_API.Controllers
             // synchronized function
             var setting = _branchSettingService.GetBranchSetting(UserBranchId);
             
-             _advancedHub.Clients.All.SendAsync($"branchSettings-{UserBranchIdString}", setting);    
-             
-            
-            
-            return Ok(new { message = "消息已发出" });
+             _advancedHub.Clients.Group(UserBranchIdString).SendAsync($"branchSettings-{UserBranchIdString}", setting);    
+
+            return Ok(new { message = "message have been sent" });
         }
 
-        [HttpPost]
-       // [Authorize(Roles = "BranchOwner")] could add some Authorize policy later
-        public IActionResult UpdateBranchSetting(SysBranchSetting model)
-        {
-            _advancedHub.Clients.All.SendAsync($"branchSettings-{UserBranchIdString}", model);
-            return Ok();
-        }
     }
 }
