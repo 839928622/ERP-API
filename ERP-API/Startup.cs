@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using ERP_API.Infrastructure;
-using ERP_API.Service.BrandSettings;
+using ERP_API.Service.BranchSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
