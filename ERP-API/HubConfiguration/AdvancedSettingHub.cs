@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ERP_API.Models;
-using ERP_API.Service.BrandSettings;
+using ERP_API.Service.BranchSettings;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ERP_API.HubConfiguration

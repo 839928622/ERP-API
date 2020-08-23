@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ERP_API.HubConfiguration;
 using ERP_API.HubDataSimulator;
 using ERP_API.Models;
-using ERP_API.Service.BrandSettings;
+using ERP_API.Service.BranchSettings;
 using ERP_API.TimerFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
