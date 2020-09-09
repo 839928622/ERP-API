@@ -10,7 +10,7 @@ using Moq;
 
 namespace ERP_API.Infrastructure
 {
-    public static class MultitenancyMigrator
+    public static class MultitenancyMigrateOperator
     {
         public static void Migrate()
         {

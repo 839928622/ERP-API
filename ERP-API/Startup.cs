@@ -35,23 +35,23 @@ namespace ERP_API
         {
 
             services.AddControllers();
-            services.AddDbContext<ApplicationDbContext>(options => { });//²»ÔÚÕâÀï½øĞĞÅäÖÃ
-            services.AddMemoryCache();//Ê¹ÓÃ»º´æ ²âÊÔ»·¾³£¬ÔİÊ±²»ÓÃÊı¾İ¿â
+            services.AddDbContext<ApplicationDbContext>(options => { });//ä¸åœ¨è¿™é‡Œè¿›è¡Œé…ç½®
+            services.AddMemoryCache();//ä½¿ç”¨ç¼“å­˜ æµ‹è¯•ç¯å¢ƒï¼Œæš‚æ—¶ä¸ç”¨æ•°æ®åº“
             services.AddHttpContextAccessor();
             services.AddSingleton<IPrincipalAccessor, PrincipalAccessor>();
             services.AddDistributedMemoryCache();
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //ÎÒÃÇ¹Ø±ÕÁËjwt claimsµÄÀàĞÍÓ³Éä£¬ÒÔ±ãÔÊĞíwell-known claimsµÄ½ÓÈë
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //æˆ‘ä»¬å…³é—­äº†jwt claimsçš„ç±»å‹æ˜ å°„ï¼Œä»¥ä¾¿å…è®¸well-known claimsçš„æ¥å…¥
             //services.AddAuthentication("Bearer")
             //        .AddJwtBearer("Bearer", options =>
             //        {
-            //            options.Authority = "http://localhost:6556"; //ÊÚÈ¨·şÎñÆ÷¶Ëµã
-            //            options.RequireHttpsMetadata = false;//²»ĞèÒªhttps£¬Éú²ú»·¾³¸ù¾İĞèÒªÊÊÅä
-            //            options.Audience = "ERP-API";//ĞèÒªÔÚÊÚÈ¨·şÎñÆ÷µÇ¼Ç¸ÃĞÅÏ¢£¬Î»ÓÚApiResource±í,ApiScopes±íÊ¾api¿ÉÒÔ·ÃÎÊÄÄĞ©×ÊÔ´
-            //            options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(60);//Ã¿¸ô60·ÖÖÓ±¾APIÏîÄ¿ÑéÖ¤Ò»´Îtoken
-            //            options.TokenValidationParameters.RequireExpirationTime = true;//ÒªÇótoken±ØĞëÉèÖÃ¹ıÆÚÊ±¼ä
+            //            options.Authority = "http://localhost:6556"; //æˆæƒæœåŠ¡å™¨ç«¯ç‚¹
+            //            options.RequireHttpsMetadata = false;//ä¸éœ€è¦httpsï¼Œç”Ÿäº§ç¯å¢ƒæ ¹æ®éœ€è¦é€‚é…
+            //            options.Audience = "ERP-API";//éœ€è¦åœ¨æˆæƒæœåŠ¡å™¨ç™»è®°è¯¥ä¿¡æ¯ï¼Œä½äºApiResourceè¡¨,ApiScopesè¡¨ç¤ºapiå¯ä»¥è®¿é—®å“ªäº›èµ„æº
+            //            options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(60);//æ¯éš”60åˆ†é’Ÿæœ¬APIé¡¹ç›®éªŒè¯ä¸€æ¬¡token
+            //            options.TokenValidationParameters.RequireExpirationTime = true;//è¦æ±‚tokenå¿…é¡»è®¾ç½®è¿‡æœŸæ—¶é—´
 
             //        });
-            //IdentityServerAuthenticationDefaults.AuthenticationSchemeÀïÃæµÄÖµ¾ÍÊÇBearer ºÍÉÏÃæµÄ´¿ÊÖĞ´µÄÒ»Ñù
+            //IdentityServerAuthenticationDefaults.AuthenticationSchemeé‡Œé¢çš„å€¼å°±æ˜¯Bearer å’Œä¸Šé¢çš„çº¯æ‰‹å†™çš„ä¸€æ ·
             //IdentityServerAuthenticationDefaults.AuthenticationScheme
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options =>
@@ -59,7 +59,7 @@ namespace ERP_API
                     options.Authority = "http://localhost:6566";
                     options.ApiName = "ERP-API";
                     options.ApiSecret = "ERP-API secret";
-                    options.RequireHttpsMetadata = false;//²âÊÔ»·¾³ÏÂ ²»ÊÊÓÃhttps
+                    options.RequireHttpsMetadata = false;//æµ‹è¯•ç¯å¢ƒä¸‹ ä¸é€‚ç”¨https
                     options.SupportedTokens = SupportedTokens.Reference;
                     options.EnableCaching = true;
                     options.CacheDuration = TimeSpan.FromSeconds(300);
@@ -101,18 +101,18 @@ namespace ERP_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            MultitenancyMigrator.Migrate();
+            MultitenancyMigrateOperator.Migrate();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("ERP-Angular-WebApp");
 
-            //app.UseHttpsRedirection(); ²âÊÔ»·¾³£¬¾Í²»ÓÃhttps
+            //app.UseHttpsRedirection(); æµ‹è¯•ç¯å¢ƒï¼Œå°±ä¸ç”¨https
 
             app.UseRouting();
-            app.UseAuthentication();//½â¾öÄãÊÇË­µÄÎÊÌâ
-            app.UseAuthorization();//½â¾ö Äã¿ÉÒÔ¸ÉÊ²Ã´µÄÎÊÌâ
+            app.UseAuthentication();//è§£å†³ä½ æ˜¯è°çš„é—®é¢˜
+            app.UseAuthorization();//è§£å†³ ä½ å¯ä»¥å¹²ä»€ä¹ˆçš„é—®é¢˜
             
             app.UseEndpoints(endpoints =>
             {
@@ -138,8 +138,8 @@ namespace ERP_API
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "http://localhost:6556"; //ÊÚÈ¨·şÎñÆ÷¶Ëµã
-                    options.RequireHttpsMetadata = false;//²»ĞèÒªhttps£¬Éú²ú»·¾³¸ù¾İĞèÒªÊÊÅä
+                    options.Authority = "http://localhost:6556"; //æˆæƒæœåŠ¡å™¨ç«¯ç‚¹
+                    options.RequireHttpsMetadata = false;//ä¸éœ€è¦httpsï¼Œç”Ÿäº§ç¯å¢ƒæ ¹æ®éœ€è¦é€‚é…
                     options.Audience = "ERP-API";//
                     options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
                     options.TokenValidationParameters.RequireExpirationTime = true;
@@ -156,7 +156,7 @@ namespace ERP_API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();//Éú²ú»·¾³ ¿ÉÒÔ¸ù¾İĞèÒª°ÑhttpÇëÇóÇ¿ÖÆ×ªÎªhttpsÇëÇó
+            app.UseHttpsRedirection();//ç”Ÿäº§ç¯å¢ƒ å¯ä»¥æ ¹æ®éœ€è¦æŠŠhttpè¯·æ±‚å¼ºåˆ¶è½¬ä¸ºhttpsè¯·æ±‚
 
             app.UseRouting();
 
@@ -187,9 +187,9 @@ namespace ERP_API
             //services.AddAuthentication("Bearer")
             //    .AddJwtBearer("Bearer", options =>
             //    {
-            //        options.Authority = "http://localhost:6556"; //ÊÚÈ¨·şÎñÆ÷¶Ëµã
-            //        options.RequireHttpsMetadata = false;//²»ĞèÒªhttps£¬Éú²ú»·¾³¸ù¾İĞèÒªÊÊÅä
-            //        options.Audience = "ERP-API";//ĞèÒªÔÚÊÚÈ¨·şÎñÆ÷µÇ¼Ç¸ÃĞÅÏ¢£¬Î»ÓÚApiScopes±í
+            //        options.Authority = "http://localhost:6556"; //æˆæƒæœåŠ¡å™¨ç«¯ç‚¹
+            //        options.RequireHttpsMetadata = false;//ä¸éœ€è¦httpsï¼Œç”Ÿäº§ç¯å¢ƒæ ¹æ®éœ€è¦é€‚é…
+            //        options.Audience = "ERP-API";//éœ€è¦åœ¨æˆæƒæœåŠ¡å™¨ç™»è®°è¯¥ä¿¡æ¯ï¼Œä½äºApiScopesè¡¨
 
             //    });
         }
