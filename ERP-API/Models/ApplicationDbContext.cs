@@ -26,8 +26,8 @@ namespace ERP_API.Models
             : base(options)
         {
             // these block of code need to be coment out when add migrations and database update  e.g. dotnet ef migrations add InitialMigration  -c ApplicationDbContext
-            this._branchIdString = httpContextAccessor.HttpContext.User.FindFirst(CustomizedClaims.BranchId).Value;
-            this._branchId = Convert.ToInt32(_branchIdString);
+            //this._branchIdString = httpContextAccessor.HttpContext.User.FindFirst(CustomizedClaims.BranchId).Value;
+            //this._branchId = Convert.ToInt32(_branchIdString);
         }
 
         
@@ -7104,6 +7104,7 @@ namespace ERP_API.Models
                     .HasColumnType("datetime")
                     .HasComment("生日");
                 entity.Property(e => e.BranchId).HasDefaultValueSql("((1))");
+              
 
                 entity.Property(e => e.DingId)
                     .HasMaxLength(50)

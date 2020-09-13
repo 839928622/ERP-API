@@ -4,7 +4,7 @@ namespace ERP_API.Models
 {
     public partial class SysUsers : BaseEntity
     {
-        public string Uuid { get; set; }
+        public Guid Uuid { get; set; }
         public string LoginName { get; set; }
         public string PassWord { get; set; }
         public string Name { get; set; }
