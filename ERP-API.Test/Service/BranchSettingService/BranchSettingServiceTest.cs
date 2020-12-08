@@ -3,11 +3,11 @@ using Xunit;
 
 namespace ERP_API.Test.Service.BranchSettingService
 {
-  public  class BranchSettingServiceTest : IClassFixture<ApplicationDbContextClassFixture>
+  public  class BranchSettingServiceTest : IClassFixture<TestBase>
     {
         private readonly ApplicationDbContext dbContext;
 
-        public BranchSettingServiceTest(ApplicationDbContextClassFixture dbContextClassFixture)
+        public BranchSettingServiceTest(TestBase dbContextClassFixture)
         {
             this.dbContext = dbContextClassFixture.GetDbContext();
         }

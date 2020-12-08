@@ -9,7 +9,7 @@ using Xunit;
 
 namespace ERP_API.Test
 {
-    public class ApplicationDbContextClassFixture
+    public class TestBase
     {
         public bool UserSqlite { get; set; }
 

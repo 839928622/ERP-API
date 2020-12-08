@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using ERP_API.Infrastructure;
 using ERP_API.Service.BranchSettings;
@@ -35,9 +36,15 @@ namespace ERP_API
         {
 
             services.AddControllers();
-            services.AddDbContext<ApplicationDbContext>(options => { });//不在这里进行配置
-            services.AddMemoryCache();//使用缓存 测试环境，暂时不用数据库
             services.AddHttpContextAccessor();
+            services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+            {
+                var httpContext = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
+                var httpRequest = httpContext.Request;
+                var connection = GetConnection(httpRequest);
+                options.UseSqlServer(connection);
+            });
+            services.AddMemoryCache();//使用缓存 测试环境，暂时不用数据库
             services.AddSingleton<IPrincipalAccessor, PrincipalAccessor>();
             services.AddDistributedMemoryCache();
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //我们关闭了jwt claims的类型映射，以便允许well-known claims的接入
@@ -96,6 +103,12 @@ namespace ERP_API
             services.AddHttpContextAccessor();
             services.AddSignalR();
             services.AddTransient<IBranchSettingService, BranchSettingService>();
+        }
+
+        private string GetConnection(HttpRequest httpRequest)
+        {
+            var clientClaim = httpRequest.HttpContext?.User.Claims.Where(c => c.Type == CustomizedClaims.BranchId).Select(c => c.Value).SingleOrDefault();
+            return Configuration.GetConnectionString(clientClaim);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

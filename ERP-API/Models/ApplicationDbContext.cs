@@ -12,8 +12,10 @@ namespace ERP_API.Models
 {
     public partial class ApplicationDbContext : DbContext
     {
+        private readonly IConfiguration _configuration;
         private readonly string _branchIdString;
         private readonly int _branchId;
+        private readonly HttpContext _httpContext;
         public bool CheckAccrossBranchIdOprations { get; set; } = true;
 
         public ApplicationDbContext()
@@ -22,12 +24,14 @@ namespace ERP_API.Models
         }
 
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IHttpContextAccessor httpContextAccessor)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IConfiguration configuration,IHttpContextAccessor httpContextAccessor = null)
             : base(options)
         {
+            _configuration = configuration;
             // these block of code need to be coment out when add migrations and database update  e.g. dotnet ef migrations add InitialMigration  -c ApplicationDbContext
             //this._branchIdString = httpContextAccessor.HttpContext.User.FindFirst(CustomizedClaims.BranchId).Value;
             //this._branchId = Convert.ToInt32(_branchIdString);
+            _httpContext = httpContextAccessor?.HttpContext;
         }
 
         
@@ -466,18 +470,15 @@ namespace ERP_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                if (string.IsNullOrEmpty(_branchIdString) && System.Environment.GetEnvironmentVariable($"{_branchIdString}") != null)
+                var clientClaim = _httpContext?.User.Claims.Where(c => c.Type == CustomizedClaims.BranchId).Select(c => c.Value).SingleOrDefault();
+                 // Let's say there is no http context, like when you update-database from PMC
+                if (clientClaim == null)
                 {
-
-                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable($"{_branchIdString}") ??
-                                                throw new InvalidOperationException
-                                                ("Can not read ConnecttingString from EnvironmentVariable"));
+                    optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
                 }
                 else
                 {
-                    optionsBuilder.UseSqlServer(System.Environment.GetEnvironmentVariable("ERPDB") ??
-                                                throw new InvalidOperationException
-                                                    ("Can not read ConnecttingString from EnvironmentVariable"));
+                    optionsBuilder.UseSqlServer(_configuration.GetConnectionString(clientClaim));
                 }
             }
 
