@@ -5,6 +5,6 @@ namespace ERP_API.Service.BranchSettings
 {
     public interface IBranchSettingService
     {
-        SysBranchSetting GetBranchSetting(int branchId);
+        Task<SysBranchSetting> GetBranchSetting(int branchId);
     }
 }

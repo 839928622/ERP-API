@@ -466,27 +466,27 @@ namespace ERP_API.Models
         public virtual DbSet<VirtualInventory> VirtualInventory { get; set; }
         public virtual DbSet<YangCaiOrderLog> YangCaiOrderLog { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                var clientClaim = _httpContext?.User.Claims.Where(c => c.Type == CustomizedClaims.BranchId).Select(c => c.Value).SingleOrDefault();
-                 // Let's say there is no http context, like when you update-database from PMC
-                if (clientClaim == null)
-                {
-                    optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-                }
-                else
-                {
-                    optionsBuilder.UseSqlServer(_configuration.GetConnectionString(clientClaim));
-                }
-            }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        var clientClaim = _httpContext?.User.Claims.Where(c => c.Type == CustomizedClaims.BranchId).Select(c => c.Value).SingleOrDefault();
+        //         // Let's say there is no http context, like when you update-database from PMC
+        //        if (clientClaim == null)
+        //        {
+        //            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+        //        }
+        //        else
+        //        {
+        //            optionsBuilder.UseSqlServer(_configuration.GetConnectionString(clientClaim));
+        //        }
+        //    }
 
-            //if (this.Database.GetPendingMigrations().Any())
-            //{
-            //    this.Database.Migrate(); // not sure if this block of code work correctly => this wont work 
-            //}
-        }
+        //    //if (this.Database.GetPendingMigrations().Any())
+        //    //{
+        //    //    this.Database.Migrate(); // not sure if this block of code work correctly => this wont work 
+        //    //}
+        //}
         public void SetGlobalBranchQueryFilter<T>(ModelBuilder builder) where T : BaseEntity
         {
             builder.Entity<T>().HasKey(e => e.Id);

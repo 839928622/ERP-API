@@ -16,14 +16,14 @@ namespace ERP_API.Service.BranchSettings
             this._memoryCache = memoryCache;
             this._applicationDbContext = applicationDbContext;
         }
-        public  SysBranchSetting GetBranchSetting(int branchId)
+        public async Task<SysBranchSetting> GetBranchSetting(int branchId)
         {
             var branchSetting = _memoryCache.Get<SysBranchSetting>(branchId);
             if (branchSetting != null)
             {
                 return branchSetting;
             }
-            var res =  _applicationDbContext.SysBranchSetting.FirstOrDefault();
+            var res = await _applicationDbContext.SysBranchSetting.FirstOrDefaultAsync();
             _memoryCache.Set(branchId, res);
             return res;
         }

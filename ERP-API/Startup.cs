@@ -107,8 +107,11 @@ namespace ERP_API
 
         private string GetConnection(HttpRequest httpRequest)
         {
-            var clientClaim = httpRequest.HttpContext?.User.Claims.Where(c => c.Type == CustomizedClaims.BranchId).Select(c => c.Value).SingleOrDefault();
-            return Configuration.GetConnectionString(clientClaim);
+            var clientClaim = httpRequest.HttpContext?.User.Claims
+                .Where(c => c.Type == CustomizedClaims.BranchId)
+                .Select(c => c.Value).SingleOrDefault();
+            return clientClaim == null ? Configuration.GetConnectionString("DefaultConnection") 
+                                       : Configuration.GetConnectionString(clientClaim);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,7 +129,7 @@ namespace ERP_API
             app.UseRouting();
             app.UseAuthentication();//解决你是谁的问题
             app.UseAuthorization();//解决 你可以干什么的问题
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

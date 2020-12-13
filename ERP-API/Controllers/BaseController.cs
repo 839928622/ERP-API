@@ -10,6 +10,7 @@ namespace ERP_API.Controllers
 
     [Authorize]
     [ApiController]
+    [Route("[controller]")]
     public class BaseController : ControllerBase
     {
 

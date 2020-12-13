@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using ERP_API.HubConfiguration;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace ERP_API.Controllers
 {
-    [Route("[controller]/[action]")]
+    
     [ApiController]
     [Authorize]
     public class AdvancedSettingController : BaseController
@@ -27,11 +28,13 @@ namespace ERP_API.Controllers
             _advancedHub = advancedContext;
             this._branchSettingService = branchSettingService;
         }
-        [HttpPost("/{connectionId}")]
+        [HttpPost("JoinGroup/{connectionId}")]
         public async Task<IActionResult> JoinGroup(string connectionId)
         {
+            var setting = await _branchSettingService.GetBranchSetting(UserBranchId);
             // consider branchId  a group name , so all branch member automate be in a group
             await _advancedHub.Groups.AddToGroupAsync(connectionId, UserBranchIdString);
+            await _advancedHub.Clients.User(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).SendAsync($"branchSettings-{UserBranchIdString}", setting);
             return Ok();
         }
         [HttpPost("/{connectionId}")]
@@ -48,13 +51,13 @@ namespace ERP_API.Controllers
             _advancedHub.Clients.Group(UserBranchIdString).SendAsync($"branchSettings-{UserBranchIdString}", model);
             return Ok();
         }
-        [HttpGet]
-        public   IActionResult Get() // client push a request to start a room/channel/connection
+        [HttpGet("get")]
+        public async  Task<IActionResult> Get() // client push a request to start a room/channel/connection
         {
             // synchronized function
-            var setting = _branchSettingService.GetBranchSetting(UserBranchId);
+            var setting = await _branchSettingService.GetBranchSetting(UserBranchId);
             
-             _advancedHub.Clients.Group(UserBranchIdString).SendAsync($"branchSettings-{UserBranchIdString}", setting);    
+            await _advancedHub.Clients.Group(UserBranchIdString).SendAsync($"branchSettings-{UserBranchIdString}", setting);    
 
             return Ok(new { message = "message have been sent" });
         }
